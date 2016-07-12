@@ -1,0 +1,21 @@
+Package: holmberg
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person( "Ross", "Holmberg", email = "ross@holmberg.com.au", role = c("aut", "cre"))
+Description: An assortment of functions to help you get on with your day.
+Depends:
+    R (>= 3.3.0)
+License: AGPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1.9000
+Imports: data.table,
+         chron,
+Suggests: plyr,
+          ggplot2,
+          stats,
+          shiny,
+          shinyjs,
+          readxl,
+          utils,
+          DT
