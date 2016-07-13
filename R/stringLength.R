@@ -19,50 +19,29 @@ stringLength <- function( input,
                           which = c( "head", "tail" ),
                           fill = NA ) {
     
-    to.return <- vector( mode = "character", length = 0L )
-    
-    for( i in seq_len( length( input ) ) ) {
-        to.act.upon <- input[i]
-        # make sure values passed from user are correct classes
-        if( !is.character( to.act.upon ) ) {
-            to.act.upon <- as.character( to.act.upon )
-        }
-        if( !is.integer( length.out ) ) {
-            length.out <- as.integer( length.out )
-        }
-        
-        # if the to.act.upon needs to be lengthened, do so
-        if( nchar( to.act.upon ) < length.out & !is.na( fill ) ) {
-            if( !is.character( fill ) ) {
-                fill <- as.character( fill )
-            }
-            fill.length <- length.out - nchar( to.act.upon )
-            if( fill.length > nchar( fill ) ) {
-                fill <- strrep( fill, ceiling( fill.length / nchar( fill ) ) )
-            } else if( fill.length < nchar( fill ) ) {
-                fill <- substr( fill, 0L, fill.length )
-            }
-            
-            if( "tail" %in% which ) {
-                to.act.upon <- paste0( fill, to.act.upon )
-            } else if( "head" %in% which ) {
-                to.act.upon <- paste0( to.act.upon, fill )
-            }
-        }
-        
-        # check which end was requested, and act accordingly
+    in.length <- nchar( input )
+    to.add <- length.out - in.length
+    if( !is.na( fill ) ) {
+        to.rep <- ceiling( abs( to.add / nchar( fill ) ) )
+        tomerge <- strrep( fill, to.rep )
         if( "tail" %in% which ) {
-            output <- substr( to.act.upon,
-                              nchar( to.act.upon ) - length.out + 1L,
-                              nchar( to.act.upon )
-            )
+            input <- paste0( tomerge, input )
         } else if( "head" %in% which ) {
-            output <- substr( to.act.upon, 0L, length.out )
+            input <- paste0( input, tomerge )
         }
-        
-        to.return <- c( to.return, output )
-        
     }
-
-    return( to.return )
+    
+    # check which end was requested, and act accordingly
+    if( "tail" %in% which ) {
+        output <- substr( input,
+                          nchar( input ) - length.out + 1L,
+                          nchar( input )
+        )
+    } else if( "head" %in% which ) {
+        output <- substr( input, 0L, length.out )
+    }
+    
+    
+    
+    return( output )
 }
