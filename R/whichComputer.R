@@ -13,6 +13,7 @@ whichComputer <- function() {
                             home.folder = as.character( NA ),
                             drive.folder = as.character( NA ),
                             folderRMRW = as.character( NA ),
+                            coresToUse = as.integer( NA ),
                             stringsAsFactors = FALSE
     )
     
@@ -65,6 +66,16 @@ whichComputer <- function() {
         "/Users/ross/Google Drive/Ross - Monash Research work/" = "rossMBPr",
         as.character( NA )
     )
+    
+    logicalCores <- parallel::detectCores( logical = FALSE )
+    virtualCores <- parallel::detectCores( logical = TRUE )
+    if( virtualCores > logicalCores ) {
+        computer$coresToUse <- logicalCores
+    } else if( logicalCores > 2 ) {
+        computer$coresToUse <- logicalCores - 1L
+    } else {
+        computer$coresToUse <- 1L
+    }
     
     return( computer )
 }
