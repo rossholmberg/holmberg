@@ -1,4 +1,4 @@
-# matchColClasses
+# supeRbind
 #' Match the column classes of one data frame to another. Useful before calling `rbind`.
 #' Note: this is just an easy way to use `getColClasses` and `applyColClasses` in a single step.
 #'
@@ -10,19 +10,13 @@
 #' @name matchColClasses
 #' @return A data frame, with column classes adjusted as necessary.
 
-matchColClasses <- function( df1, df2 ) {
-    
-    if( identical( colnames( df1 ), colnames( df2 ) ) ) {
-        
-        return( holmberg::applyColClasses( df2, holmberg::getColClasses( df1 ) ) )
-        
-    } else {
-        
-        stop( "Column names don't match. Repair, perhaps with matchColNames() first." )
-        
-    }
-    
+
+supeRbind <- function( df1, df2 ) {
+    rbind( 
+        df1,
+        matchColClasses( 
+            matchColNames( df1, df2 ), 
+            df2 
+        )
+    )
 }
-
-
-
