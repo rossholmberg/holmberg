@@ -1,19 +1,19 @@
 #' Retrieve the column classes from a data frame.
 #'
 #'
-#' @param df
+#' @param student A data frame from which to retrieve classes.
 #' @keywords dataframe, datatable, columns, classes
 #' @export
 #' @return A vector of classes, represented as character strings.
 
 
-getColClasses <- function( df ) {
+getColClasses <- function( student ) {
     
     col.classes <- vector( mode = "character", length = 0L )
     
-    for( col.num in seq_len( dim( df )[2] ) ) {
+    for( col.num in seq_len( dim( student )[2] ) ) {
         
-        col.classes <- c( col.classes, class( df[[col.num]] )[1] )
+        col.classes <- c( col.classes, class( student[[col.num]] )[1] )
         
     }
     

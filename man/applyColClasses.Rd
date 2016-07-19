@@ -4,10 +4,12 @@
 \alias{applyColClasses}
 \title{Apply column classes to a data frame. Useful before calling `rbind`.}
 \usage{
-applyColClasses(df, col.classes)
+applyColClasses(student, master.classes)
 }
 \arguments{
-\item{col.classes}{A vector of classes to be applied. Probably an output from `getColClasses`.}
+\item{student}{A data frame to be adjusted.}
+
+\item{master.classes}{A vector of classes to be applied. Probably an output from `getColClasses`.}
 }
 \value{
 A data frame, with column classes adjusted as necessary.

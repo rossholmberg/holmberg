@@ -4,7 +4,10 @@
 \alias{getColClasses}
 \title{Retrieve the column classes from a data frame.}
 \usage{
-getColClasses(df)
+getColClasses(student)
+}
+\arguments{
+\item{student}{A data frame from which to retrieve classes.}
 }
 \value{
 A vector of classes, represented as character strings.

@@ -4,11 +4,12 @@
 \alias{matchColNames}
 \title{Match the column names between 2 data frames. Useful to use before doing calling `rbind`.}
 \usage{
-matchColNames(df1, df2)
+matchColNames(master, student)
 }
 \arguments{
-\item{df1}{A dataframe or datatable, to be changed to match columns of df2.
-df2 A "master" dataframe or datatable, df1 will be changed to match this.}
+\item{master}{A data frame or data table acting as MASTER.}
+
+\item{student}{A data frame or data table, will "learn" from the master.}
 }
 \value{
 A data frame, with column names adjusted as necessary.

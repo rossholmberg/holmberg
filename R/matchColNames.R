@@ -1,53 +1,53 @@
 #' Match the column names between 2 data frames. Useful to use before doing calling `rbind`.
 #'
 #'
-#' @param df1 A data frame or data table acting as MASTER.
-#' @param df2 A data frame or data table, will be adjusted to match df1.
+#' @param master A data frame or data table acting as MASTER.
+#' @param student A data frame or data table, will "learn" from the master.
 #' @export
 #' @keywords dataframe, datatable, columns, matching
 #' @import data.table
 #' @return A data frame, with column names adjusted as necessary.
 
-matchColNames <- function( df1, df2 ) {
+matchColNames <- function( master, student ) {
     
     # flag whether or not the input started as a data.table or data.frame
-    df2.was.DT <- data.table::is.data.table( df2 )
+    student.was.DT <- data.table::is.data.table( student )
     
     # make everything data.table class
-    data.table::setDT( df1 )
-    data.table::setDT( df2 )
+    data.table::setDT( master )
+    data.table::setDT( student )
     
     # get the column names of both datatables
-    df1.colnames <- colnames( df1 )
-    df2.colnames <- colnames( df2 )
+    master.colnames <- colnames( master )
+    student.colnames <- colnames( student )
     
     # check if they already match
-    if( identical( df1.colnames, df2.colnames ) ) {
+    if( identical( master.colnames, student.colnames ) ) {
         print( "No change to column names needed." )
         
         # check if we at least have the same number of columns    
-    } else if( length( df1.colnames ) == length( df2.colnames ) ) {
+    } else if( length( master.colnames ) == length( student.colnames ) ) {
         
         # check to see if the column names are the same, just out of order
-        if( sum( is.na( match( df2.colnames, df1.colnames ) ) ) == 0L ) {
+        if( sum( is.na( match( student.colnames, master.colnames ) ) ) == 0L ) {
             
             print( "Columns seem to just be out of order. Reordering..." )
-            data.table::setcolorder( df2, df1.colnames )
+            data.table::setcolorder( student, master.colnames )
             
-        } else if( sum( is.na( match( df1.colnames, df2.colnames ) ) ) == 1L ) {
+        } else if( sum( is.na( match( master.colnames, student.colnames ) ) ) == 1L ) {
             print( "Only 1 column name isn't matched. Renaming it to match." )
-            data.table::setnames( df2, 
-                                  df2.colnames[ is.na( match( df1.colnames, df2.colnames ) ) ],
-                                  df1.colnames[ is.na( match( df1.colnames, df2.colnames ) ) ]
+            data.table::setnames( student, 
+                                  student.colnames[ is.na( match( master.colnames, student.colnames ) ) ],
+                                  master.colnames[ is.na( match( master.colnames, student.colnames ) ) ]
             )
             
             print( "And reordering..." )
-            data.table::setcolorder( df2, df1.colnames )
+            data.table::setcolorder( student, master.colnames )
             
         } else {
             
             stop(
-                paste( sum( is.na( match( df1.colnames, df2.colnames ) ) ),
+                paste( sum( is.na( match( master.colnames, student.colnames ) ) ),
                        "column names cannot be matched automatically. Make corrections and try again." )
             )
             
@@ -55,31 +55,31 @@ matchColNames <- function( df1, df2 ) {
         
         # different number of columns... let's see what we can do about that    
         # there might just be missing columns, so add them...
-    } else if( sum( is.na( match( df2.colnames, df1.colnames ) ) ) == 0L ) {
+    } else if( sum( is.na( match( student.colnames, master.colnames ) ) ) == 0L ) {
         
         print( paste( "It looks like",
-                      sum( is.na( match( df1.colnames, df2.colnames ) ) ),
+                      sum( is.na( match( master.colnames, student.colnames ) ) ),
                       "columns are missing. Adding them now."
         ) )
         
         # get a list of new columns that are needed
-        cols.to.add <- df1.colnames[ !grepl( df2.colnames, df1.colnames ) ]
+        cols.to.add <- master.colnames[ !grepl( student.colnames, master.colnames ) ]
         
         # add those new columns
-        df2[ , as.vector( cols.to.add ) := NA ]
+        student[ , as.vector( cols.to.add ) := NA ]
         
         # and get the column ordering right
         print( "And reordering..." )
-        data.table::setcolorder( df2, df1.colnames )
+        data.table::setcolorder( student, master.colnames )
         
     }
     
     # change the output back to a dataframe if that's how it was brought in
-    if( !df2.was.DT ) {
-        data.table::setDF( df2 )
+    if( !student.was.DT ) {
+        data.table::setDF( student )
     }
     
     # send the fixed up datatable or dataframe back as output
-    return( df2 )
+    return( student )
     
 }
