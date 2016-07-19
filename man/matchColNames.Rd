@@ -10,6 +10,9 @@ matchColNames(df1, df2)
 \item{df1}{A dataframe or datatable, to be changed to match columns of df2.
 df2 A "master" dataframe or datatable, df1 will be changed to match this.}
 }
+\value{
+A data frame, with column names adjusted as necessary.
+}
 \description{
 Match the column names between 2 data frames. Useful to use before doing calling `rbind`.
 }

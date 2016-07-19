@@ -12,6 +12,9 @@ matchColClasses(df1, df2)
 
 \item{df2}{A data frame or data table to be matched. This one will be unchanged}
 }
+\value{
+A data frame, with column classes adjusted as necessary.
+}
 \description{
 Match the column classes of one data frame to another. Useful before calling `rbind`.
 Note: this is just an easy way to use `getColClasses` and `applyColClasses` in a single step.

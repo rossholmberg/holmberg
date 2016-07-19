@@ -9,6 +9,9 @@ applyColClasses(df, col.classes)
 \arguments{
 \item{col.classes}{A vector of classes to be applied. Probably an output from `getColClasses`.}
 }
+\value{
+A data frame, with column classes adjusted as necessary.
+}
 \description{
 Apply column classes to a data frame. Useful before calling `rbind`.
 }

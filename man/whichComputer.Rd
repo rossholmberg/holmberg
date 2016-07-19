@@ -6,6 +6,9 @@
 \usage{
 whichComputer()
 }
+\value{
+A data frame, with one observation. Collected parameters are returned column-wise.
+}
 \description{
 A function to find the computer currently in use
 }

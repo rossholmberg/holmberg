@@ -7,6 +7,7 @@
 #' @export
 #' @keywords dataframe, datatable, columns, matching
 #' @import data.table
+#' @return A data frame, with column names adjusted as necessary.
 
 matchColNames <- function( df1, df2 ) {
     

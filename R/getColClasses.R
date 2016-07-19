@@ -4,6 +4,7 @@
 #' @param df
 #' @keywords dataframe, datatable, columns, classes
 #' @export
+#' @return A vector of classes, represented as character strings.
 
 
 getColClasses <- function( df ) {

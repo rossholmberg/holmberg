@@ -12,6 +12,7 @@
 #' lengthen, meaning output strings may be shorter than "length.out".
 #' @keywords character string length
 #' @export
+#' @return A vector of character strings, the same vector length as `input`.
 
 
 stringLength <- function( input,

@@ -6,6 +6,9 @@
 \usage{
 getColClasses(df)
 }
+\value{
+A vector of classes, represented as character strings.
+}
 \description{
 Retrieve the column classes from a data frame.
 }

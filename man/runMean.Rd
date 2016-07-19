@@ -18,6 +18,9 @@ Goes to TRUE if `overlap` is TRUE.}
 
 \item{na.Rm}{Logical, to be passed to `mean` function as `na.rm`.}
 }
+\value{
+A numeric vector, the same length as input.
+}
 \description{
 Smooth a numeric vector using moving window averaging.
 }

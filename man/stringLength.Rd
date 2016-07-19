@@ -20,6 +20,9 @@ stringLength(input, length.out, which = c("head", "tail"), fill = NA)
 characters where input needs to be lengthened. NA (default) will not
 lengthen, meaning output strings may be shorter than "length.out".}
 }
+\value{
+A vector of character strings, the same vector length as `input`.
+}
 \description{
 Change the length of a character string, placing the input string at
 one end of the output string (if lengthening), or taking one end of

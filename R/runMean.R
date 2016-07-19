@@ -11,6 +11,7 @@
 #' @keywords mean smooth rolling window
 #' @export
 #' @import data.table utils
+#' @return A numeric vector, the same length as input.
 
 runMean <- function( input,
                      window,

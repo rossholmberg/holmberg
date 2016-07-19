@@ -5,6 +5,7 @@
 #' @param col.classes A vector of classes to be applied. Probably an output from `getColClasses`.
 #' @keywords dataframe, datatable, columns, classes
 #' @export
+#' @return A data frame, with column classes adjusted as necessary.
 
 
 applyColClasses <- function( df, col.classes ) {

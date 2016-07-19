@@ -3,6 +3,7 @@
 #'
 #' @keywords computer OperatingSystem UserName
 #' @export
+#' @return A data frame, with one observation. Collected parameters are returned column-wise.
 
 whichComputer <- function() {
     

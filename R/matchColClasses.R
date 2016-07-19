@@ -8,6 +8,7 @@
 #' @export
 #' @import data.table
 #' @name matchColClasses
+#' @return A data frame, with column classes adjusted as necessary.
 
 matchColClasses <- function( df1, df2 ) {
     
