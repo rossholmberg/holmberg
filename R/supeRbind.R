@@ -2,8 +2,8 @@
 #' Match the column classes of one data frame to another. Useful before calling `rbind`.
 #' Note: this is just an easy way to use `getColClasses` and `applyColClasses` in a single step.
 #'
-#' @param df1 A data frame or data table acting as MASTER.
-#' @param df2 A data frame or data table, will be adjusted to match df1.
+#' @param master A data frame or data table acting as MASTER.
+#' @param student A data frame or data table, will "learn" from the master.
 #' @keywords dataframe, datatable, columns, classes
 #' @export
 #' @import data.table
@@ -11,12 +11,12 @@
 #' @return A data frame, with column classes adjusted as necessary.
 
 
-supeRbind <- function( df1, df2 ) {
+supeRbind <- function( master, student ) {
     rbind( 
-        df1,
+        master,
         matchColClasses( 
-            matchColNames( df1, df2 ), 
-            df2 
+            matchColNames( master, student ), 
+            student 
         )
     )
 }

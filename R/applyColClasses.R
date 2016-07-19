@@ -1,40 +1,43 @@
 #' Apply column classes to a data frame. Useful before calling `rbind`.
 #'
 #'
-#' @param df
-#' @param col.classes A vector of classes to be applied. Probably an output from `getColClasses`.
+#' @param student
+#' @param master.classes A vector of classes to be applied. Probably an output from `getColClasses`.
 #' @keywords dataframe, datatable, columns, classes
 #' @export
 #' @return A data frame, with column classes adjusted as necessary.
 
 
-applyColClasses <- function( df, col.classes ) {
+applyColClasses <- function( student, master.classes ) {
     
-    for( col.num in seq_len( dim( df )[2] ) ) {
+    # for every column in the student frame...
+    for( col.num in seq_len( dim( student )[2] ) ) {
         
-        if( class( df[[col.num]] )[1] == col.classes[col.num] ) {
+        # check if it's already what we want
+        if( class( student[[col.num]] )[1] == master.classes[col.num] ) {
             
+            # if so, move on
             next
-            
         }
         
-        if( col.classes[col.num] == "times" ) {
+        if( master.classes[col.num] == "times" ) {
             
-            df[[col.num]] <- chron::times( df[[col.num]] )
+            student[[col.num]] <- chron::times( student[[col.num]] )
             
-        } else if( col.classes[col.num] == "POSIXct" ) {
+        } else if( master.classes[col.num] == "POSIXct" ) {
             
-            df[[col.num]] <- as.POSIXct( df[[col.num]] )
+            student[[col.num]] <- as.POSIXct( student[[col.num]] )
             
         } else {
             
-            class( df[[col.num]] ) <- col.classes[col.num]
+            class( student[[col.num]] ) <- master.classes[col.num]
             
         }
         
     }
     
-    return( df )
+    # give the adjusted frame back to the user
+    return( student )
     
 }
 
