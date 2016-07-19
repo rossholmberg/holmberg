@@ -10,8 +10,7 @@
 #' @param na.Rm Logical, to be passed to `mean` function as `na.rm`.
 #' @keywords mean smooth rolling window
 #' @export
-#' @import data.table
-
+#' @import data.table utils
 
 runMean <- function( input,
                      window,

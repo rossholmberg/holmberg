@@ -1,2 +1,2 @@
 # holmberg
-R package
+A package of functions I think are useful.
