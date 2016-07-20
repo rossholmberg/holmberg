@@ -14,8 +14,8 @@ supeRbind <- function( master, student ) {
     rbind( 
         master,
         matchColClasses( 
-            matchColNames( master, student ), 
-            student 
+            master,
+            matchColNames( master, student )
         )
     )
 }
