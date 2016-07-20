@@ -20,6 +20,13 @@ applyColClasses <- function( student, master.classes ) {
             next
         }
         
+        # if it's a factor class column...
+        if( class( student[[col.num]] )[1] == "factor" ) {
+            
+            # convert it to character class before going any further
+            student[[col.num]] <- as.character( student[[col.num]] )
+        }
+        
         if( master.classes[col.num] == "times" ) {
             
             student[[col.num]] <- chron::times( student[[col.num]] )
