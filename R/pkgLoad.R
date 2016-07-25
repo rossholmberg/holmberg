@@ -11,7 +11,7 @@
 
 pkgLoad <- function( packages = "favourites" ) {
     
-    if( packages == "favourites" ) {
+    if( length( packages ) == 1L && packages == "favourites" ) {
         packages <- c( "data.table", "chron", "plyr", "dplyr", "shiny",
                        "shinyjs", "parallel", "devtools", "doMC", "utils",
                        "stats", "microbenchmark", "ggplot2", "readxl",
