@@ -4,7 +4,10 @@
 \alias{whichComputer}
 \title{A function to find the computer currently in use}
 \usage{
-whichComputer()
+whichComputer(applyCores = TRUE)
+}
+\arguments{
+\item{applyCores}{If TRUE, uses the obtained `coresToUse` values via doMC's `registerDoMC`.}
 }
 \value{
 A data frame, with one observation. Collected parameters are returned column-wise.
