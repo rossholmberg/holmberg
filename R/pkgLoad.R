@@ -2,8 +2,7 @@
 #' then load that package
 #'
 #'
-#' @param 
-#' packages A vector of packages to be checked or installed.
+#' @param packages A vector of packages to be checked or installed.
 #' Defaults to a list of my favourite packages, all worth having.
 #' 
 #' @keywords packages
