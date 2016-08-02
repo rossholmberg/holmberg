@@ -10,7 +10,7 @@
 
 applyColClasses <- function( student, master.classes ) {
     
-    # for every column in the student frame...
+    # for every column in the student frame
     for( col.num in seq_len( dim( student )[2] ) ) {
         
         # check if it's already what we want
