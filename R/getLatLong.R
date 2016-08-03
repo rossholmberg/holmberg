@@ -4,7 +4,7 @@
 #' @param location A string to pass to Google maps API for searching.
 #' @keywords GoogleMaps
 #' @export
-#' @return 
+#' @return dataframe
 
 getLatLong <- function( location ) {
     
@@ -39,22 +39,27 @@ getLatLong <- function( location ) {
         locationRow <- match( "location", input$split1 )
         
         # if so, use it (or at least the rows just below it)
-        if( !is.na( locationRow ) ) {
+        if( !is.na( locationRow ) & 
+            grepl( "lat", input$split1[ locationRow + 1 ] ) == TRUE ) {
             lat <- gsub( " ", "", input$split2[ locationRow + 1 ] )
-            long <- gsub( " ", "", input$split2[ locationRow + 2 ] )
-            
         } else {
-            
             # otherwise, we'll need to use the "boundary" values, using them to get a
             # best guess of the location's latitude and longitude
-            
             lat <- mean( as.numeric( input$split2[ grepl( "lat", input$split1 ) ] ),
                          na.rm = TRUE
             )
+        }
+        
+        # if so, use it (or at least the rows just below it)
+        if( !is.na( locationRow ) & 
+            grepl( "lng", input$split1[ locationRow + 2 ] ) == TRUE ) {
+            long <- gsub( " ", "", input$split2[ locationRow + 2 ] )
+        } else {
+            # otherwise, we'll need to use the "boundary" values, using them to get a
+            # best guess of the location's latitude and longitude
             long <- mean( as.numeric( input$split2[ grepl( "lng", input$split1 ) ] ),
-                          na.rm = TRUE
+                         na.rm = TRUE
             )
-            
         }
         
         

@@ -2,6 +2,7 @@
 
 export(applyColClasses)
 export(getColClasses)
+export(getLatLong)
 export(matchColClasses)
 export(matchColNames)
 export(navto)
