@@ -9,15 +9,19 @@
 getLatLong <- function( location ) {
     
     # Create an appropriate URL to search via the Google Maps API
-    urlForGoogleAPI <- URLencode(
-        paste0( "http://maps.googleapis.com/maps/api/geocode/json?address=", location, "&sensor=false" )
+    urlForGoogleAPI <- utils::URLencode(
+        paste0( "http://maps.googleapis.com/maps/api/geocode/json?address=", location )
     )
     
     # attempt to retrieve data from the Google Maps API
     input <- try( 
-        read.csv( urlForGoogleAPI, stringsAsFactors = FALSE ), 
+        utils::read.csv( urlForGoogleAPI, stringsAsFactors = FALSE ), 
         silent = TRUE 
     )
+    
+    address <- as.character( NA )
+    lat <- as.character( NA )
+    long <- as.character( NA )
     
     # first check that the data was returned
     if( class( input ) != "try-error" ) {
@@ -56,14 +60,16 @@ getLatLong <- function( location ) {
         
         # see if there's a formatted address value
         formattedAddressRow <- match( "formatted_address", input$split1 )
-        address <- as.character( NA )
         if( !is.na( formattedAddressRow ) ) {
             address <- input$split2[ formattedAddressRow ]
         }
         
-        output <- data.frame( loc = location, )
-        
     }
+    
+    output <- data.frame( location = location, address = address,
+                          lat = lat, long = long )
+    
+    return( output )
     
 }
 
