@@ -4,7 +4,7 @@
 #' @param location A string to pass to Google maps API for searching.
 #' @keywords GoogleMaps
 #' @export
-#' @return dataframe
+#' @return dataframe with lats and longs added
 
 getLatLong <- function( location ) {
     
