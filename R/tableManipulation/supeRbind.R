@@ -1,4 +1,4 @@
-# supeRbind
+#' supeRbind
 #' Match the column classes of one data frame to another. Useful before calling `rbind`.
 #' Note: this is just an easy way to use `getColClasses` and `applyColClasses` in a single step.
 #'
