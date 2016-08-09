@@ -2,15 +2,15 @@
 #'
 #'
 #' @param image An array, imported from an image file.
-#' @param clipBlacks Numeric value 0-1. Fraction of image to clip to black.
-#' @param clipWhites Numeric value 0-1. Fraction of image to clip to white.
+#' @param clipBlacks Numeric value 0-1. Fraction of image area to clip to black.
+#' @param clipWhites Numeric value 0-1. Fraction of image area to clip to white.
 #' 
 #' @keywords image modify levels
 #' @export
 
 autoLevels <- function( image, clipBlacks = 0.02, clipWhites = 0.02 ) {
     
-    for( layer in dim( image )[3] ) {
+    for( layer in seq_len( dim( image )[3] ) ) {
         
         # find white and black points
         colour <- sort( image[,,layer], decreasing = FALSE )
@@ -32,4 +32,5 @@ autoLevels <- function( image, clipBlacks = 0.02, clipWhites = 0.02 ) {
     
 }
 
+# new <- array( data = rep( seq_len( 100 ), 3 ), dim = c( 10, 10, 3 ) )
 
