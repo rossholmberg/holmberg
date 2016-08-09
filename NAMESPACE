@@ -3,6 +3,7 @@
 export(applyColClasses)
 export(getColClasses)
 export(getLatLong)
+export(latDegToKm)
 export(matchColClasses)
 export(matchColNames)
 export(navto)

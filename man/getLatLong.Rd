@@ -10,7 +10,7 @@ getLatLong(location)
 \item{location}{A string to pass to Google maps API for searching.}
 }
 \value{
-dataframe
+dataframe with lats and longs added
 }
 \description{
 Search Google Maps for GPS coordinates, and return as latitude and longitude.
