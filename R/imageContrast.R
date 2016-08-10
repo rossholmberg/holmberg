@@ -2,7 +2,7 @@
 #'
 #'
 #' @param input A file extension to a jpg file, or an array imported from an image file.
-#' @param k Value between -1 and 1
+#' @param k Value between -1 and 1. Positive to increase contrast, negative to decrease.
 #' @import jpeg
 #' @keywords image modify curve contrast
 #' @export

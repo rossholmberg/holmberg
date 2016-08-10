@@ -7,9 +7,9 @@
 imageContrast(input, k = 0.3)
 }
 \arguments{
-\item{input}{An array, imported from an image file.}
+\item{input}{A file extension to a jpg file, or an array imported from an image file.}
 
-\item{k}{Value between -1 and 1}
+\item{k}{Value between -1 and 1. Positive to increase contrast, negative to decrease.}
 }
 \description{
 calculate and apply an S curve to modify the contrast of an image
