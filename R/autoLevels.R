@@ -32,5 +32,5 @@ autoLevels <- function( image, clipBlacks = 0.02, clipWhites = 0.02 ) {
     
 }
 
-# new <- array( data = rep( seq_len( 100 ), 3 ), dim = c( 10, 10, 3 ) )
+# new <- array( data = rep( seq.int( from = 0, to = 1, by = 1/100 ), 3 ), dim = c( 10, 10, 3 ) )
 
