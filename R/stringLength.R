@@ -20,11 +20,20 @@ stringLength <- function( input,
                           which = c( "head", "tail" ),
                           fill = NA ) {
     
+    # check the character length we're working with
     in.length <- nchar( input )
+    
+    # work out how many characters we need to add
     to.add <- length.out - in.length
+    
+    # if the `fill` argument was TRUE
     if( !is.na( fill ) ) {
+        # work out how many times we need to repeat the fill characters
         to.rep <- ceiling( abs( to.add / nchar( fill ) ) )
+        # create a vector of strings to be merged
         tomerge <- strrep( fill, to.rep )
+        
+        # and add those strings to the input (in the right order)
         if( "tail" %in% which ) {
             input <- paste0( tomerge, input )
         } else if( "head" %in% which ) {
@@ -32,7 +41,8 @@ stringLength <- function( input,
         }
     }
     
-    # check which end was requested, and act accordingly
+    # now that we've lengthened where requested (some may be too long)
+    # check which end was requested, and shorten accordingly
     if( "tail" %in% which ) {
         output <- substr( input,
                           nchar( input ) - length.out + 1L,
