@@ -7,9 +7,11 @@
 #' @param input A character vector (coerced to character if not already)
 #' @param length.out Integer or numerical value for output character length
 #' @param which Options "head" (start of string) or "tail" (end of string)
-#' @param fill Character vector of any length, used to fill in missing
-#' characters where input needs to be lengthened. NA (default) will not
-#' lengthen, meaning output strings may be shorter than "length.out".
+#' @param fill String of any length, used to fill in missing characters 
+#' where input needs to be lengthened. NA (default) will not lengthen, 
+#' meaning output strings may be shorter than "length.out".
+#' Note that `fill` is applied outwards from centre.
+#' 
 #' @keywords character string length
 #' @export
 #' @return A vector of character strings, the same vector length as `input`.
@@ -53,6 +55,47 @@ stringLength <- function( input,
     }
     
     
-    
+    # and return the processed vector
     return( output )
+}
+
+
+
+
+#' tagsLongToShort
+#' Specific function for converting hex PIT tag readings to a 6 character
+#' base 10 integer, as used by the older "Automated Penguin Monitoring System".
+#'
+#'
+#' @param tags A character vector (coerced to character if not already)
+#' 
+#' 
+#' @keywords character integer string length hex conversion
+#' @export
+#' @return A vector of character strings, the same vector length as the input one.
+
+tagsLongToShort <- function( tags ) {
+    
+    # coerce to character just in case
+    tags <- as.character( tags )
+    
+    # shorten the hex tags to 8 characters
+    tags <- stringLength( input = tags, 
+                          length.out = 8L, 
+                          which = "tail" 
+    )
+    
+    # convert to numeric
+    tags <- strtoi( tags, base = 16L )
+    
+    # and shorten again to 6 digits (convert to character in the process)
+    tags <- stringLength( input = as.character( tags ),
+                          length.out = 6L,
+                          which = "tail",
+                          fill = "0"
+    )
+    
+    # output to the user
+    return( tags )
+    
 }
