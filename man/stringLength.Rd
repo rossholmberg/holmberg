@@ -16,9 +16,10 @@ stringLength(input, length.out, which = c("head", "tail"), fill = NA)
 
 \item{which}{Options "head" (start of string) or "tail" (end of string)}
 
-\item{fill}{Character vector of any length, used to fill in missing
-characters where input needs to be lengthened. NA (default) will not
-lengthen, meaning output strings may be shorter than "length.out".}
+\item{fill}{String of any length, used to fill in missing characters 
+where input needs to be lengthened. NA (default) will not lengthen, 
+meaning output strings may be shorter than "length.out".
+Note that `fill` is applied outwards from centre.}
 }
 \value{
 A vector of character strings, the same vector length as `input`.

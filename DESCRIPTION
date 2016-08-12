@@ -21,3 +21,5 @@ Suggests: plyr,
           readxl,
           utils,
           DT
+SystemRequirements: "exiftool" for exifRead (http://www.sno.phy.queensu.ca/~phil/exiftool/)
+
