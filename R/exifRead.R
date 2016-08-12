@@ -43,7 +43,6 @@ exifRead <- function( files, coresToUse = TRUE ) {
                               time = time,
                             stringsAsFactors = FALSE )
         )
-        
     }
     
     # see if we should work in parallel. Either take the number given by the user
@@ -55,7 +54,16 @@ exifRead <- function( files, coresToUse = TRUE ) {
         doMC::registerDoMC( cores = holmberg::whichComputer()$coresToUse )
     }
     
-    # apply the function to all files in the list
+    # see if we should work in parallel. Either take the number given by the user
+    if( is.numeric( coresToUse ) || is.integer( coresToUse ) ) {
+        doMC::registerDoMC( cores = coresToUse )
+        
+    # or where the user only specifies "TRUE", check for cores ourselves
+    } else if( coresToUse ) {
+        doMC::registerDoMC( cores = holmberg::whichComputer()$coresToUse )
+    }
+    
+    # run the function on all files
     output <- plyr::ldply( .data = files, 
                            .fun = getTheExifData,
                            .parallel = TRUE )
