@@ -25,6 +25,10 @@ exifRead <- function( files, coresToUse = TRUE ) {
                             stringsAsFactors = F )
         names( exif ) <- c( "label", "contents" )
         
+        # strip white space
+        exif$label <- holmberg::stripWhiteSpace( exif$label, which = "both" )
+        exif$contents <- holmberg::stripWhiteSpace( exif$contents, which = "both" )
+        
         # retrieve the date and time
         datetime <- unlist( strsplit( 
             exif[ grep( "File Modification", exif$label ), 2 ], 
