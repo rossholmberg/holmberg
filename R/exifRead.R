@@ -61,8 +61,9 @@ exifRead <- function( files, coresToUse = TRUE ) {
     }
     
     # see if we should work in parallel. Either take the number given by the user
-    if( is.numeric( coresToUse ) || is.integer( coresToUse ) ) {
-        doMC::registerDoMC( cores = coresToUse )
+    if( !is.na( as.integer( coresToUse ) ) ) {
+        
+        doMC::registerDoMC( cores = as.integer( coresToUse ) )
         
     # or where the user only specifies "TRUE", check for cores ourselves
     } else if( coresToUse ) {
@@ -74,6 +75,7 @@ exifRead <- function( files, coresToUse = TRUE ) {
                            .fun = getTheExifData,
                            .parallel = TRUE )
     
+    # and send the output to the user
     return( output )
     
 }
