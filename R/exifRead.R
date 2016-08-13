@@ -2,6 +2,8 @@
 #'
 #'
 #' @param files A vector of files to be analysed.
+#' @param coresToUse Either "TRUE" (will use some logic to determine the number of cores to utilise),
+#' or an integer value specifying the number of cores to multi-thread tasks to.
 #' @import chron
 #' @import plyr
 #' @import doMC
