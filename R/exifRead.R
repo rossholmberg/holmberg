@@ -18,7 +18,7 @@ exifRead <- function( files, coresToUse = TRUE ) {
     getTheExifData <- function( file ) {
         
         # apply the exiftool command line tool to get the data
-        exif <- system( paste0( "exiftool ", file ), intern = TRUE )
+        exif <- system( paste0( "exiftool -s '", file, "'" ), intern = TRUE )
         
         # separate the data, and put it into a data frame
         exif <- strsplit( exif, split = " : " )
@@ -33,13 +33,13 @@ exifRead <- function( files, coresToUse = TRUE ) {
         
         # retrieve the date and time
         datetime <- unlist( strsplit( 
-            exif[ grep( "File Modification", exif$label ), 2 ], 
+            exif[ grep( "FileModifyDate", exif$label ), 2 ], 
             split = " " ) )
         date <- as.Date( datetime[1], format = "%Y:%m:%d" )
         time <- chron::times( substr( datetime[2], 0, 8 ) )
         
         # retrieve the file details
-        filename <- exif[ grep( "File Name", exif$label ), 2 ]
+        filename <- exif[ grep( "FileName", exif$label ), 2 ]
         directory <- exif[ grep( "Directory", exif$label ), 2 ]
         
         # add the retrieved data to the main data frame
