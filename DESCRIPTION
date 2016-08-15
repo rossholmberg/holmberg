@@ -4,7 +4,7 @@ Version: 0.0.2.0100
 Authors@R: person( "Ross", "Holmberg", email = "ross@holmberg.com.au", role = c( "aut", "cre" ) )
 Description: An assortment of functions to help you get on with your day.
 Depends: R (>= 3.0.0)
-License: GPL-3
+License: GPL-3 + file LICENSE
 URL: https://gitlab.com/rossholmberg/holmberg
 Encoding: UTF-8
 LazyData: true
