@@ -2,6 +2,8 @@
 #'
 #'
 #' @param input A character vector from which white space is to be stripped.
+#' @param which One of "both", "leading", or "trailing". Specifying from which
+#' end (or both) to strip white space.
 #' @keywords string character whitespace leading trailing
 #' @export
 

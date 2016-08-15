@@ -5,6 +5,7 @@ Authors@R: person( "Ross", "Holmberg", email = "ross@holmberg.com.au", role = c(
 Description: An assortment of functions to help you get on with your day.
 Depends: R (>= 3.0.0)
 License: GPL-3
+URL: https://gitlab.com/rossholmberg/holmberg
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
@@ -12,8 +13,9 @@ Imports: data.table,
          chron,
          parallel,
          doMC,
-         jpeg
-Suggests: plyr,
+         jpeg,
+         plyr
+Suggests: dplyr,
           ggplot2,
           stats,
           shiny,

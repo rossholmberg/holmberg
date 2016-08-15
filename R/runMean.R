@@ -6,11 +6,12 @@
 #' @param window Numeric value for the size of each "group" to be averaged.
 #' @param overlap Logical. Should the windows overlap (by half the window size)?
 #' @param fill.NAs Logical. If TRUE, only the centre point of each window is filled.
-#' Goes to TRUE if `overlap` is TRUE.
+#' Forces to TRUE if `overlap` is TRUE.
 #' @param na.Rm Logical, to be passed to `mean` function as `na.rm`.
 #' @keywords mean smooth rolling window
 #' @export
-#' @import data.table utils
+#' @import data.table 
+#' @import utils
 #' @return A numeric vector, the same length as input.
 
 runMean <- function( input,
@@ -18,6 +19,10 @@ runMean <- function( input,
                      overlap = FALSE,
                      fill.NAs = TRUE,
                      na.Rm = TRUE ) {
+    
+    # define some variables (purely for the sake of CRAN package checks)
+    means.group <- group.mean <- input.data <- group.row <- group.row.means <-  NULL
+    group.mean.2 <- group.means.2 <- group.row.2 <- group.row.means.2 <- NULL
     
     # put the data into a table
     row.means.calc <- data.table( input.data = input )

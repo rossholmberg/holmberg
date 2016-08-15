@@ -8,6 +8,9 @@ stripWhiteSpace(input, which = "both")
 }
 \arguments{
 \item{input}{A character vector from which white space is to be stripped.}
+
+\item{which}{One of "both", "leading", or "trailing". Specifying from which
+end (or both) to strip white space.}
 }
 \description{
 Strip the white space from around a character string

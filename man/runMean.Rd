@@ -14,7 +14,7 @@ runMean(input, window, overlap = FALSE, fill.NAs = TRUE, na.Rm = TRUE)
 \item{overlap}{Logical. Should the windows overlap (by half the window size)?}
 
 \item{fill.NAs}{Logical. If TRUE, only the centre point of each window is filled.
-Goes to TRUE if `overlap` is TRUE.}
+Forces to TRUE if `overlap` is TRUE.}
 
 \item{na.Rm}{Logical, to be passed to `mean` function as `na.rm`.}
 }
