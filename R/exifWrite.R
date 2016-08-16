@@ -1,4 +1,4 @@
-#' Apply a new exif tag to image files
+#' Apply new exif data to image files
 #'
 #'
 #' @param files A vector of files to be modified.
@@ -14,15 +14,15 @@
 exifWrite <- function( files, comment, latlon, coresToUse = TRUE ) {
     
     # create a function to make the relevant system call
-    writeTheCommentToExif <- function( file, 
+    writeToExif <- function( file, 
                                        commentToApply, 
-                                       latlon ) {
+                                       latlonToApply ) {
         
-        # format the latlon argument to suit exiftool
-        latitude <- as.character( abs( latlon[1] ) )
-        longitude <- as.character( abs( latlon[2] ) )
-        latitudeRef <- ifelse( latlon[1] >= 0, "N", "S" )
-        longitudeRef <- ifelse( latlon[2] >= 0, "E", "W" )
+        # format the latlonToApply argument to suit exiftool
+        latitude <- as.character( abs( latlonToApply[1] ) )
+        longitude <- as.character( abs( latlonToApply[2] ) )
+        latitudeRef <- ifelse( latlonToApply[1] >= 0, "N", "S" )
+        longitudeRef <- ifelse( latlonToApply[2] >= 0, "E", "W" )
         
         # make the system call
         system( paste0( 'exiftool -GPSLatitude="', latitude,
@@ -45,7 +45,7 @@ exifWrite <- function( files, comment, latlon, coresToUse = TRUE ) {
     
     # apply the function to all listed files
     plyr::l_ply( .data = files,
-                 .fun = writeTheCommentToExif,
+                 .fun = writeToExif,
                  commentToApply = comment,
                  latlon = latlon,
                  .parallel = TRUE
