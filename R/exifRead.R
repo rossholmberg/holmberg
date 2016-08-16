@@ -17,8 +17,12 @@ exifRead <- function( files, coresToUse = TRUE ) {
     # set up a basic function to retrieve the exif data
     getTheExifData <- function( file ) { 
         return( 
-            read.csv( text = 
-                          system( paste0( "exiftool -csv '", file, "'" ), intern = TRUE )
+            read.csv( 
+                text = system( paste0( "exiftool -csv '", file, "'" ), intern = TRUE ),
+                header = TRUE,
+                stringsAsFactors = FALSE,
+                fill = TRUE,
+                strip.white = TRUE
             ) 
         ) 
     }
