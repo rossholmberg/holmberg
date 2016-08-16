@@ -32,15 +32,37 @@ exifRead <- function( files, coresToUse = TRUE ) {
         exif$contents <- holmberg::stripWhiteSpace( exif$contents, which = "both" )
         
         # retrieve the date and time
-        datetime <- unlist( strsplit( 
-            exif[ grep( "FileModifyDate", exif$label ), 2 ], 
-            split = " " ) )
-        date <- as.Date( datetime[1], format = "%Y:%m:%d" )
-        time <- chron::times( substr( datetime[2], 0, 8 ) )
+        # first make them NA (in case they can't be found in the exif)
+        date <- as.Date( NA )
+        time <- chron::times( NA )
+        # then see if they're in the exif
+        if( "FileModifyDate" %in% exif$label ) {
+            # and make them look nice if so (overwriting the NAs we just made)
+            datetime <- unlist( strsplit( 
+                exif[ grep( "FileModifyDate", exif$label ), 2 ], 
+                split = " " ) )
+            date <- as.Date( datetime[1], format = "%Y:%m:%d" )
+            time <- chron::times( substr( datetime[2], 0, 8 ) )
+        } else {
+            # send a warning if the datetime couldn't be found
+            warning( "No datetime found, outputting as NA" )
+        }
         
-        # retrieve the file details
-        filename <- exif[ grep( "FileName", exif$label ), 2 ]
-        directory <- exif[ grep( "Directory", exif$label ), 2 ]
+        
+        # retrieve the file details. Starting with NA values
+        filename <- directory <- as.character( NA )
+        
+        if( "FileName" %in% exif&label ) {
+            filename <- exif[ grep( "FileName", exif$label ), 2 ]
+        } else {
+            warning( "No filename found, outputting as NA" )
+        }
+        
+        if( "Directory" %in% exif&label ) {
+            directory <- exif[ grep( "Directory", exif$label ), 2 ]
+        } else {
+            warning( "No directory found, outputting as NA" )
+        }
         
         # add the retrieved data to the main data frame
         return( data.frame( filename = filename, 
@@ -60,15 +82,6 @@ exifRead <- function( files, coresToUse = TRUE ) {
         doMC::registerDoMC( cores = holmberg::whichComputer()$coresToUse )
     }
     
-    # see if we should work in parallel. Either take the number given by the user
-    if( !is.na( as.integer( coresToUse ) ) ) {
-        
-        doMC::registerDoMC( cores = as.integer( coresToUse ) )
-        
-    # or where the user only specifies "TRUE", check for cores ourselves
-    } else if( coresToUse ) {
-        doMC::registerDoMC( cores = holmberg::whichComputer()$coresToUse )
-    }
     
     # run the function on all files
     output <- plyr::ldply( .data = files, 
