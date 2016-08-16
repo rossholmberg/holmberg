@@ -2,7 +2,7 @@
 % Please edit documentation in R/exifWrite.R
 \name{exifWrite}
 \alias{exifWrite}
-\title{Apply a new exif tag to image files}
+\title{Apply new exif data to image files}
 \usage{
 exifWrite(files, comment, latlon, coresToUse = TRUE)
 }
@@ -17,7 +17,7 @@ exifWrite(files, comment, latlon, coresToUse = TRUE)
 or an integer value specifying the number of cores to multi-thread tasks to.}
 }
 \description{
-Apply a new exif tag to image files
+Apply new exif data to image files
 }
 \keyword{add}
 \keyword{comment}
