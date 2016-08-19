@@ -12,14 +12,17 @@
 
 withinRange <- function( x, range, inclusive = TRUE ) {
     
+    # run a few preprocessing checks
     stopifnot(
         !is.na( as.numeric( x ) ),
         length( range ) >= 2L,
         is.logical( inclusive )
     )
     
+    # decide whether to include the bounding values as part of the range
     if( inclusive ) {
         
+        # then evaluate the range
         output <- min( range, na.rm = TRUE ) <= x &
             max( range, na.rm = TRUE ) >= x
         
@@ -30,6 +33,7 @@ withinRange <- function( x, range, inclusive = TRUE ) {
         
     }
     
+    # return the output to the user
     return( output )
     
 }
