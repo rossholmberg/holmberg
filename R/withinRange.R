@@ -38,6 +38,8 @@ withinRange <- function( x, range, inclusive = TRUE ) {
     
 }
 
+
+
 #' Also create a wrapper `%within%` for ease of use
 #'
 #'
@@ -48,7 +50,7 @@ withinRange <- function( x, range, inclusive = TRUE ) {
 #' @return A logical value or vector showing whether each value is within the range.
 #' 
 
-"%within%" <- function( x, range ) { 
+`%within%` <- function( x, range ) { 
     withinRange( x = x, range = range, inclusive = TRUE ) 
 }
 
