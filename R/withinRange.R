@@ -37,3 +37,18 @@ withinRange <- function( x, range, inclusive = TRUE ) {
     return( output )
     
 }
+
+#' Also create a wrapper `%within%` for ease of use
+#'
+#'
+#' @param x Value or vector of values to test.
+#' @param range A vector of length at least 2, from which the range will be computed.
+#' @keywords range within numeric integer
+#' @export
+#' @return A logical value or vector showing whether each value is within the range.
+#' 
+
+"%within%" <- function( x, range ) { 
+    withinRange( x = x, range = range, inclusive = TRUE ) 
+}
+
