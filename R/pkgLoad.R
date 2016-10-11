@@ -8,7 +8,7 @@
 #' @keywords packages
 #' @export
 
-pkgLoad <- function( packages = "favourites" ) {
+pkgLoad <- function( packages = "favourites", quietly = TRUE ) {
     
     if( length( packages ) == 1L && packages == "favourites" ) {
         packages <- c( "data.table", "chron", "plyr", "dplyr", "shiny",
@@ -27,11 +27,14 @@ pkgLoad <- function( packages = "favourites" ) {
         utils::install.packages( packagestoinstall,
                                  repos = "http://cran.csiro.au"
         )
-    } else {
+    } else if( !quietly ) {
         print( "All requested packages already installed" )
     }
     
     for( package in packages ) {
+        if( !quietly ) {
+            print( paste( "Installing", package ) )
+        }
         suppressPackageStartupMessages(
             library( package, character.only = TRUE, quietly = TRUE )
         )
