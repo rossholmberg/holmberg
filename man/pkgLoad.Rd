@@ -5,11 +5,13 @@
 \title{activate the "install.packages" function, only if the package is not already installed,
 then load that package}
 \usage{
-pkgLoad(packages = "favourites")
+pkgLoad(packages = "favourites", quietly = TRUE)
 }
 \arguments{
 \item{packages}{A vector of packages to be checked or installed.
 Defaults to a list of my favourite packages, all worth having.}
+
+\item{quietly}{TRUE or FALSE, should be suppress helper outputs?}
 }
 \description{
 activate the "install.packages" function, only if the package is not already installed,

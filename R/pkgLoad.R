@@ -4,6 +4,7 @@
 #'
 #' @param packages A vector of packages to be checked or installed.
 #' Defaults to a list of my favourite packages, all worth having.
+#' @param quietly TRUE or FALSE, should be suppress helper outputs?
 #' 
 #' @keywords packages
 #' @export
