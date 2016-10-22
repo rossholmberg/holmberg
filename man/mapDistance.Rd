@@ -9,11 +9,13 @@ mapDistance(lat.1, lon.1, lat.2, lon.2, unit = "km")
 \arguments{
 \item{lat.1}{latitude position, point 1}
 
-\item{lat.1}{longitude position, point 1}
+\item{lon.1}{longitude position, point 1}
 
-\item{lat.1}{latitude position, point 2}
+\item{lat.2}{latitude position, point 2}
 
-\item{lat.1}{longitude position, point 2}
+\item{lon.2}{longitude position, point 2}
+
+\item{unit}{distance units desired for output, default "km"}
 }
 \value{
 numeric value, km between the two points
