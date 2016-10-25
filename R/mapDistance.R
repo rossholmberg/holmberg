@@ -79,12 +79,12 @@ lonKmToDeg <- function( km, lat = 39.32633 ) {
 mapDistance <- function( lat.1, lon.1, lat.2, lon.2, unit = "km" ) { 
     
     # run a couple of pre-flight checks
-    if( !{ length( lat.1 ) == 1L || length( lat.2 ) == 1L || length( lat.1 ) == length( lat.2 ) } ) {
-        stop( "Either coordinates 1 and 2 must be the same length, or one of them must be length 1." )
-    }
-    if( length( lat.1 ) == length( lon.1 ) && length( lat.2 ) == length( lon.2 ) ) {
-        stop( "Lat vectors must match the length of their corresponding lon vectors." )
-    }
+    # if( !{ length( lat.1 ) == 1L || length( lat.2 ) == 1L || length( lat.1 ) == length( lat.2 ) } ) {
+    #     stop( "Either coordinates 1 and 2 must be the same length, or one of them must be length 1." )
+    # }
+    # if( length( lat.1 ) == length( lon.1 ) && length( lat.2 ) == length( lon.2 ) ) {
+    #     stop( "Lat vectors must match the length of their corresponding lon vectors." )
+    # }
     
     # get the latitudinal distances
     lat.dist <- latDegToKm( abs( lat.1 - lat.2 ) )
