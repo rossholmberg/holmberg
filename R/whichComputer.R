@@ -61,6 +61,8 @@ whichComputer <- function( applyCores = TRUE ) {
             computer$folderRMRW <- paste0( computer$drive.folder,
                                            "Ross - Monash Research work/" )
         }
+    } else if( file.exists( "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/" ) ) {
+        computer$folderRMRW <- "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/"
     } else if( file.exists( "~/APMS" ) ) {
         computer$folderRMRW <- paste0( computer$home.folder, "APMS/" )
     }
@@ -68,6 +70,7 @@ whichComputer <- function( applyCores = TRUE ) {
     computer$name <- switch(
         EXPR = computer$folderRMRW,
         "/Users/ross/Google Drive/Ross - Monash Research work/" = "rossMBPr",
+        "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/" = "rossWorkUbuntu",
         as.character( NA )
     )
     
