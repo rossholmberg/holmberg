@@ -19,7 +19,8 @@ sourceFolder <- function( folder, except = NULL, use.regex = FALSE, quietly = FA
             except <- paste0( except, collapse = "|" )
             files <- files[ !grepl( except, files ) ]
         } else {
-            files <- files[ !( files %in% except ) ]
+            filenames <- sapply( strsplit( files, split = "/" ), tail, n = 1L )
+            files <- files[ !( filenames %in% except ) ]
         }
         
     }
