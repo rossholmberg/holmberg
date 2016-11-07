@@ -30,8 +30,8 @@ sourceFolder <- function( folder, except = NULL, use.regex = FALSE, quietly = FA
         source( file )
         
         if( !quietly ) {
-            print( paste( "Sourced", 
-                          sapply( strsplit( file, split = "/" ), tail, n = 1L ) ) 
+            print( paste( "Sourced",
+                          tail( strsplit( file, split = "/" )[[1]], n = 1L ) )
             )
         }
         
