@@ -3,12 +3,13 @@
 #'
 #' @param master A data frame or data table acting as MASTER.
 #' @param student A data frame or data table, will "learn" from the master.
+#' @param remove.unwanted logical. Whether or not to remove columns not needed to match "master"
 #' @export
 #' @keywords dataframe, datatable, columns, matching
 #' @import data.table
 #' @return A data frame, with column names adjusted as necessary.
 
-matchColNames <- function( master, student ) {
+matchColNames <- function( master, student, remove.unwanted = TRUE ) {
     
     # flag whether or not the input started as a data.table or data.frame
     student.was.DT <- data.table::is.data.table( student )
@@ -25,23 +26,62 @@ matchColNames <- function( master, student ) {
     if( identical( master.colnames, student.colnames ) ) {
         print( "No change to column names needed." )
         
-        # check if we at least have the same number of columns    
-    } else if( length( master.colnames ) == length( student.colnames ) ) {
+        # change the output back to a dataframe if that's how it was brought in
+        if( !student.was.DT ) {
+            data.table::setDF( student )
+        }
+        
+        # send the fixed up datatable or dataframe back as output
+        return( student )
+        
+        break
+        
+            
+    }
+    
+    # remove unwanted columns if requested
+    if( sum( !student.colnames %in% master.colnames ) > 0 ) {
+        cols.to.remove <- which( !student.colnames %in% master.colnames )
+        if( remove.unwanted ) {
+            print( paste( "Columns",
+                          paste( student.colnames[ cols.to.remove ], collapse = ", " ),
+                          "are not needed, removing them." ) )
+            for( col in cols.to.remove ) {
+                student[ , student.colnames[ col ] := NULL ]
+            }
+        } else {
+            stop( print( paste( "Columns",
+                                paste( cols.to.remove, collapse = ", " ),
+                                "are not needed, try running with `remove.unwanted = TRUE` to remove them." ) )
+            )
+        }
+    }
+    
+    # check if there are columns missing, and add them if so
+    if( sum( !master.colnames %in% student.colnames ) > 0 ) {
+        
+        cols.missing <- which( !master.colnames %in% student.colnames )
+        
+        print( paste( "Columns", 
+                      paste( master.colnames[ cols.missing ], collapse = ", " ), 
+                      "are missing, adding them now" ) 
+        )
+        
+        for( col in cols.missing ) {
+            newcoldata <- rep( NA, nrow( student ) )
+            class( newcoldata ) <- class( master[[ col ]] )
+            student[ , colnames( master )[ col ] := newcoldata ]
+        }
+        
+    }
+    
+    # check if we at least have the same number of columns
+    if( length( master.colnames ) == length( student.colnames ) ) {
         
         # check to see if the column names are the same, just out of order
         if( sum( is.na( match( student.colnames, master.colnames ) ) ) == 0L ) {
             
-            print( "Columns seem to just be out of order. Reordering..." )
-            data.table::setcolorder( student, master.colnames )
-            
-        } else if( sum( is.na( match( master.colnames, student.colnames ) ) ) == 1L ) {
-            print( "Only 1 column name isn't matched. Renaming it to match." )
-            data.table::setnames( student, 
-                                  student.colnames[ is.na( match( master.colnames, student.colnames ) ) ],
-                                  master.colnames[ is.na( match( master.colnames, student.colnames ) ) ]
-            )
-            
-            print( "And reordering..." )
+            print( "Columns are out of order. Reordering..." )
             data.table::setcolorder( student, master.colnames )
             
         } else {
