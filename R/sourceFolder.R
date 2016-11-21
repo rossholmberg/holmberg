@@ -13,7 +13,7 @@ sourceFolder <- function( folder, except = NULL, use.regex = FALSE, quietly = FA
     
     files <- list.files( path = folder, pattern = ".R$", full.names = TRUE )
     
-    if( !is.null( except ) && !is.na( except ) ) {
+    if( !is.null( except ) && ( length( except ) > 1L || !is.na( except ) ) ) {
         
         if( use.regex ) {
             except <- paste0( except, collapse = "|" )
