@@ -36,19 +36,20 @@ matchColNames <- function( master, student, remove.unwanted = TRUE ) {
         
         break
         
-            
+        
     }
     
     # remove unwanted columns if requested
     if( sum( !student.colnames %in% master.colnames ) > 0 ) {
         cols.to.remove <- which( !student.colnames %in% master.colnames )
         if( remove.unwanted ) {
+            
             print( paste( "Columns",
                           paste( student.colnames[ cols.to.remove ], collapse = ", " ),
                           "are not needed, removing them." ) )
-            for( col in cols.to.remove ) {
-                student[ , student.colnames[ col ] := NULL ]
-            }
+            student[ , student.colnames[ cols.to.remove ] := NULL ]
+            student.colnames <- colnames( student )
+            
         } else {
             stop( print( paste( "Columns",
                                 paste( cols.to.remove, collapse = ", " ),
@@ -67,11 +68,11 @@ matchColNames <- function( master, student, remove.unwanted = TRUE ) {
                       "are missing, adding them now" ) 
         )
         
-        for( col in cols.missing ) {
-            newcoldata <- rep( NA, nrow( student ) )
-            class( newcoldata ) <- class( master[[ col ]] )
-            student[ , colnames( master )[ col ] := newcoldata ]
-        }
+        # add those new columns
+        student[ , master.colnames[ cols.missing ] := NA ]
+        
+        student.colnames <- colnames( student )
+        
         
     }
     
