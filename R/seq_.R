@@ -43,6 +43,7 @@ seq_across <- function( x ) {
 #'
 #' @param x data.frame (incl. data.table) or array (incl. matrix) object
 #' @param mar integer for margin along which to create the sequence
+#'
 #' @keywords data.frame data.table array matrix
 #' @export
 #' @return vector sequence
