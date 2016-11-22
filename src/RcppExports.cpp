@@ -6,8 +6,8 @@
 using namespace Rcpp;
 
 // idDub
-NumericVector idDub(int i, NumericVector inputlat, NumericVector inputlon, NumericMatrix inputdata, NumericVector outputlat, NumericVector outputlon);
-RcppExport SEXP holmberg_idDub(SEXP iSEXP, SEXP inputlatSEXP, SEXP inputlonSEXP, SEXP inputdataSEXP, SEXP outputlatSEXP, SEXP outputlonSEXP) {
+NumericVector idDub(int i, NumericVector inputlat, NumericVector inputlon, NumericMatrix inputdata, NumericVector outputlat, NumericVector outputlon, NumericVector landmask);
+RcppExport SEXP holmberg_idDub(SEXP iSEXP, SEXP inputlatSEXP, SEXP inputlonSEXP, SEXP inputdataSEXP, SEXP outputlatSEXP, SEXP outputlonSEXP, SEXP landmaskSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,7 +17,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type inputdata(inputdataSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type outputlat(outputlatSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type outputlon(outputlonSEXP);
-    rcpp_result_gen = Rcpp::wrap(idDub(i, inputlat, inputlon, inputdata, outputlat, outputlon));
+    Rcpp::traits::input_parameter< NumericVector >::type landmask(landmaskSEXP);
+    rcpp_result_gen = Rcpp::wrap(idDub(i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask));
     return rcpp_result_gen;
 END_RCPP
 }
