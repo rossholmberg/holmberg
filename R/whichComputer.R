@@ -1,14 +1,12 @@
 #' A function to find the computer currently in use
 #'
 #'
-#' @param applyCores If TRUE, uses the obtained `coresToUse` values via doMC's `registerDoMC`.
 #' @keywords computer OperatingSystem UserName
 #' @export
 #' @return A data frame, with one observation. Collected parameters are returned column-wise.
 #' @import parallel
-#' @import doMC
 
-whichComputer <- function( applyCores = TRUE ) {
+whichComputer <- function() {
     
     computer <- data.frame( name = as.character( NA ),
                             OS = as.character( NA ),
@@ -84,9 +82,9 @@ whichComputer <- function( applyCores = TRUE ) {
         computer$coresToUse <- 1L
     }
     
-    if( applyCores ) {
-        doMC::registerDoMC( cores = computer$coresToUse )
-    }
+    # if( applyCores ) {
+    #     doMC::registerDoMC( cores = computer$coresToUse )
+    # }
     
     return( computer )
 }
