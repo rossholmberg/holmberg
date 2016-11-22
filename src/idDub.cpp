@@ -1,11 +1,20 @@
-
 #include <Rcpp.h>
 using namespace Rcpp;
-
-// A c++ implementation of inverse distance weighted interpolation
-
+//' calculate data based on inverse distance weighted interpolation
+//'
+//'
+//' @param i row number to analyse
+//' @param inputlat latitudes of input data
+//' @param inputlon longitudes of input data
+//' @param inputdata input data
+//' @param outputlat latitudes of output data
+//' @param outputlon longitudes of output data
+//' @param landmask aligned data for masking
+//' 
+//' @keywords inverse distance weighted average
+//' @export
+//'
 // [[Rcpp::export]]
-
 NumericVector idDub( int i,
                      NumericVector inputlat,
                      NumericVector inputlon,
