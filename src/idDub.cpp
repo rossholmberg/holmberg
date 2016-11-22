@@ -19,6 +19,7 @@ NumericVector idDub( int i,
     int nrowsin = inputdata.rows();
     NumericVector outputdata( ncols );
     NumericVector dist( nrowsin );
+    int zerodist;
     NumericVector datarunning( nrowsin );
     NumericVector fill_nas( ncols, NumericVector::get_na() );
     
@@ -29,20 +30,25 @@ NumericVector idDub( int i,
     );
     
     // if there's a perfectly aligned datapoint, use it (assume there's only 1)
-    // if( min( dist ) == 0 ) {
-    //     outputdata( row, _ ) = inputdata( dist == 0, _ );
-    //     continue;
-    // };
-    
-    // otherwise, perform a full scale inverse distance weighted interpolation
-    for( int col = 0; col < ncols; ++col ) {
-        datarunning = inputdata( _ , col );
-        NumericVector datarunning_touse = datarunning[ is_na( datarunning ) == FALSE ];
-        NumericVector dist_touse = dist[ is_na( datarunning ) == FALSE ];
+    if( min( dist ) == 0 ) {
         
-        outputdata[ col ] = 
-            sum( datarunning_touse / dist_touse ) / sum( 1 / dist_touse );
+        zerodist = which_min( dist );
+        outputdata = inputdata( zerodist, _ );
+        
+    } else {
+        
+        // otherwise, perform a full scale inverse distance weighted interpolation
+        for( int col = 0; col < ncols; ++col ) {
+            datarunning = inputdata( _ , col );
+            NumericVector datarunning_touse = datarunning[ is_na( datarunning ) == FALSE ];
+            NumericVector dist_touse = dist[ is_na( datarunning ) == FALSE ];
+            
+            outputdata[ col ] = 
+                sum( datarunning_touse / dist_touse ) / sum( 1 / dist_touse );
+        }
+        
     }
+    
     
     return outputdata;
     
