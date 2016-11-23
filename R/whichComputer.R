@@ -1,14 +1,12 @@
 #' A function to find the computer currently in use
 #'
 #'
-#' @param applyCores If TRUE, uses the obtained `coresToUse` values via doMC's `registerDoMC`.
 #' @keywords computer OperatingSystem UserName
 #' @export
 #' @return A data frame, with one observation. Collected parameters are returned column-wise.
 #' @import parallel
-#' @import doMC
 
-whichComputer <- function( applyCores = TRUE ) {
+whichComputer <- function() {
     
     computer <- data.frame( name = as.character( NA ),
                             OS = as.character( NA ),
@@ -61,6 +59,8 @@ whichComputer <- function( applyCores = TRUE ) {
             computer$folderRMRW <- paste0( computer$drive.folder,
                                            "Ross - Monash Research work/" )
         }
+    } else if( file.exists( "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/" ) ) {
+        computer$folderRMRW <- "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/"
     } else if( file.exists( "~/APMS" ) ) {
         computer$folderRMRW <- paste0( computer$home.folder, "APMS/" )
     }
@@ -68,6 +68,7 @@ whichComputer <- function( applyCores = TRUE ) {
     computer$name <- switch(
         EXPR = computer$folderRMRW,
         "/Users/ross/Google Drive/Ross - Monash Research work/" = "rossMBPr",
+        "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/" = "rossWorkUbuntu",
         as.character( NA )
     )
     
@@ -81,9 +82,9 @@ whichComputer <- function( applyCores = TRUE ) {
         computer$coresToUse <- 1L
     }
     
-    if( applyCores ) {
-        doMC::registerDoMC( cores = computer$coresToUse )
-    }
+    # if( applyCores ) {
+    #     doMC::registerDoMC( cores = computer$coresToUse )
+    # }
     
     return( computer )
 }

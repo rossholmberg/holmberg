@@ -68,20 +68,40 @@ lonKmToDeg <- function( km, lat = 39.32633 ) {
 #'
 #'
 #' @param lat.1 latitude position, point 1
-#' @param lat.1 longitude position, point 1
-#' @param lat.1 latitude position, point 2
-#' @param lat.1 longitude position, point 2
+#' @param lon.1 longitude position, point 1
+#' @param lat.2 latitude position, point 2
+#' @param lon.2 longitude position, point 2
+#' @param unit distance units desired for output, default "km"
 #' @keywords maps gis
 #' @export
 #' @return numeric value, km between the two points
 
 mapDistance <- function( lat.1, lon.1, lat.2, lon.2, unit = "km" ) { 
     
-    # get the latitudinal distance
+    # run a couple of pre-flight checks
+    # if( !{ length( lat.1 ) == 1L || length( lat.2 ) == 1L || length( lat.1 ) == length( lat.2 ) } ) {
+    #     stop( "Either coordinates 1 and 2 must be the same length, or one of them must be length 1." )
+    # }
+    # if( length( lat.1 ) == length( lon.1 ) && length( lat.2 ) == length( lon.2 ) ) {
+    #     stop( "Lat vectors must match the length of their corresponding lon vectors." )
+    # }
+    
+    # get the latitudinal distances
     lat.dist <- latDegToKm( abs( lat.1 - lat.2 ) )
     
+    # get a latitude to use as a reference point
+    if( length( lat.1 ) == 1L && length( lat.2 ) == 1L ) {
+        lat.ref <- mean( lat.1, lat.2 )
+    } else if( length( lat.1 ) == 1L ) {
+        lat.ref <- lat.1
+    } else if( length( lat.2 ) == 1L ) {
+        lat.ref <- lat.2
+    } else {
+        lat.ref <- ( lat.1 + lat.2 ) / 2
+    }
+    
     # and the longitudinal distance
-    lon.dist <- lonDegToKm( abs( lon.1 - lon.2 ), lat = mean( lat.1, lat.2 ) )
+    lon.dist <- lonDegToKm( abs( lon.1 - lon.2 ), lat = lat.ref )
     
     # calculate a distance in km
     dist <- sqrt( lat.dist ^ 2 + lon.dist ^ 2 )

@@ -7,15 +7,18 @@
 #' @keywords dataframe, datatable, columns, classes
 #' @export
 #' @import data.table
+#' @import magrittr
 #' @return A data frame, with column classes adjusted as necessary.
 
 
 supeRbind <- function( master, student ) {
-    rbind( 
-        master,
-        matchColClasses( 
-            master,
-            matchColNames( master, student )
-        )
-    )
+    
+    output <- student %>%
+        matchColNames( master = master ) %>%
+        matchColClasses( master = master )
+        
+    output <- rbind( master, output )
+    
+    return( output )
+    
 }
