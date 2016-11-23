@@ -4,6 +4,23 @@
 #' calculate data based on inverse distance weighted interpolation
 #'
 #'
+#' @param inputlat latitudes of input data
+#' @param inputlon longitudes of input data
+#' @param inputdata input data
+#' @param outputlat latitudes of output data
+#' @param outputlon longitudes of output data
+#' @param landmask aligned data for masking
+#' 
+#' @keywords inverse distance weighted average
+#' @export
+#'
+idDub_allRows <- function(inputlat, inputlon, inputdata, outputlat, outputlon, landmask) {
+    .Call('holmberg_idDub_allRows', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
+}
+
+#' calculate data based on inverse distance weighted interpolation
+#'
+#'
 #' @param i row number to analyse
 #' @param inputlat latitudes of input data
 #' @param inputlon longitudes of input data

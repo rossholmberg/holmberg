@@ -5,6 +5,22 @@
 
 using namespace Rcpp;
 
+// idDub_allRows
+NumericMatrix idDub_allRows(NumericVector inputlat, NumericVector inputlon, NumericMatrix inputdata, NumericVector outputlat, NumericVector outputlon, NumericVector landmask);
+RcppExport SEXP holmberg_idDub_allRows(SEXP inputlatSEXP, SEXP inputlonSEXP, SEXP inputdataSEXP, SEXP outputlatSEXP, SEXP outputlonSEXP, SEXP landmaskSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type inputlat(inputlatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type inputlon(inputlonSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type inputdata(inputdataSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type outputlat(outputlatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type outputlon(outputlonSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type landmask(landmaskSEXP);
+    rcpp_result_gen = Rcpp::wrap(idDub_allRows(inputlat, inputlon, inputdata, outputlat, outputlon, landmask));
+    return rcpp_result_gen;
+END_RCPP
+}
 // idDub
 NumericVector idDub(int i, NumericVector inputlat, NumericVector inputlon, NumericMatrix inputdata, NumericVector outputlat, NumericVector outputlon, NumericVector landmask);
 RcppExport SEXP holmberg_idDub(SEXP iSEXP, SEXP inputlatSEXP, SEXP inputlonSEXP, SEXP inputdataSEXP, SEXP outputlatSEXP, SEXP outputlonSEXP, SEXP landmaskSEXP) {
