@@ -13,7 +13,7 @@ seq_down <- function( x ) {
     }
     
     return(
-        seq_along( nrow( x ) )
+        seq_len( nrow( x ) )
     )
 }
 
@@ -33,7 +33,7 @@ seq_across <- function( x ) {
     }
     
     return(
-        seq_along( ncol( x ) )
+        seq_len( ncol( x ) )
     )
 }
 
