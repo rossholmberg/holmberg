@@ -35,6 +35,10 @@ applyColClasses <- function( student, master.classes ) {
             
             student[[col.num]] <- as.POSIXct( student[[col.num]] )
             
+        } else if( master.classes[col.num] == "Date" ) {
+            
+            student[[col.num]] <- as.Date( student[[col.num]] )
+            
         } else {
             
             class( student[[col.num]] ) <- master.classes[col.num]
