@@ -1,6 +1,6 @@
 Package: holmberg
 Title: A personal package by Ross Holmberg
-Version: 0.0.6.02
+Version: 0.0.6.3
 Authors@R: person( "Ross", "Holmberg", email = "ross@holmberg.com.au", role = c( "aut", "cre" ) )
 Description: An assortment of functions to help you get on with your day.
 Depends: R (>= 3.3.0)
@@ -13,7 +13,7 @@ Imports: data.table,
          Rcpp,
          chron,
          parallel,
-         doMC,
+         doParallel,
          jpeg,
          plyr,
          magrittr
