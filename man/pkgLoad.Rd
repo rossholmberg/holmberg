@@ -5,13 +5,16 @@
 \title{activate the "install.packages" function, only if the package is not already installed,
 then load that package}
 \usage{
-pkgLoad(packages = "favourites", quietly = TRUE)
+pkgLoad(packages = "favourites", repos = "http://cran.csiro.au",
+  quietly = FALSE)
 }
 \arguments{
 \item{packages}{A vector of packages to be checked or installed.
 Defaults to a list of my favourite packages, all worth having.}
 
-\item{quietly}{TRUE or FALSE, should be suppress helper outputs?}
+\item{repos}{A character string, linking to the repository to be utilised if packages need installing.}
+
+\item{quietly}{TRUE or FALSE, should we suppress helper outputs?}
 }
 \description{
 activate the "install.packages" function, only if the package is not already installed,
