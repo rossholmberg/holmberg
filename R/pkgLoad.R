@@ -48,7 +48,7 @@ pkgLoad <- function( packages = "favourites", repos = "http://cran.csiro.au", qu
                                  repos = repos
         )
     } else if( !quietly ) {
-        cat( "All requested packages already installed." )
+        cat( "All requested packages already installed.\n" )
     }
     
     # Also make sure they're all loaded
