@@ -74,7 +74,9 @@ whichComputer <- function() {
     
     logicalCores <- parallel::detectCores( logical = FALSE )
     virtualCores <- parallel::detectCores( logical = TRUE )
-    if( virtualCores > logicalCores ) {
+    if( anyNA( c( logicalCores, virtualCores ) ) ) {
+        computer$coresToUse <- 1L
+    } else if( virtualCores > logicalCores ) {
         computer$coresToUse <- logicalCores
     } else if( logicalCores > 2 ) {
         computer$coresToUse <- logicalCores - 1L
