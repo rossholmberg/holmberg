@@ -10,7 +10,7 @@
 #' @keywords packages
 #' @export
 
-pkgLoad <- function( packages = "favourites", repos = "http://cran.csiro.au", quietly = FALSE ) {
+pkgLoad <- function( packages = "favourites", repos = "http://cran.ms.unimelb.edu.au/", quietly = FALSE ) {
     
     if( length( packages ) == 1L && packages == "favourites" ) {
         packages <- c( "data.table", "chron", "plyr", "ggplot2", "tibble",

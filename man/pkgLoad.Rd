@@ -5,7 +5,7 @@
 \title{activate the "install.packages" function, only if the package is not already installed,
 then load that package}
 \usage{
-pkgLoad(packages = "favourites", repos = "http://cran.csiro.au",
+pkgLoad(packages = "favourites", repos = "http://cran.ms.unimelb.edu.au/",
   quietly = FALSE)
 }
 \arguments{
