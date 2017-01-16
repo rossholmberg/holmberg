@@ -12,14 +12,16 @@
 
 pkgLoad <- function( packages = "favourites", repos = "http://cran.ms.unimelb.edu.au/", quietly = FALSE ) {
     
-    if( length( packages ) == 1L && packages == "favourites" ) {
-        packages <- c( "data.table", "chron", "plyr", "ggplot2", "tibble",
+    if( "favourites" %in% tolower( packages ) ) {
+        packages <- c( packages[ !grepl( "favourites", packages, ignore.case = TRUE ) ],
+                       "data.table", "chron", "plyr", "ggplot2", "tibble",
                        "tidyr", "readr", "purrr", "dplyr", "shiny", "shinyjs",
                        "parallel", "foreach", "ggmap", "ggvis", "doMC",
                        "utils", "stats", "microbenchmark", "readxl", "feather",
                        "googlesheets", "DT", "knitr", "rmarkdown", "Rcpp",
-                       "RcppArmadillo"
+                       "RcppArmadillo", "magrittr"
         )
+        packages <- unique( packages )
     }
     
     packagecheck <- match( packages, utils::installed.packages()[,1] )
