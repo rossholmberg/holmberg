@@ -8,14 +8,14 @@
 
 whichComputer <- function() {
     
-    computer <- data.frame( name = as.character( NA ),
-                            OS = as.character( NA ),
-                            user = as.character( NA ),
-                            r.version = as.character( NA ),
-                            home.folder = as.character( NA ),
-                            drive.folder = as.character( NA ),
-                            folderRMRW = as.character( NA ),
-                            coresToUse = as.integer( NA ),
+    computer <- data.frame( name = NA_character_,
+                            OS = NA_character_,
+                            user = NA_character_,
+                            r.version = NA_character_,
+                            home.folder = NA_character_,
+                            drive.folder = NA_character_,
+                            folderRMRW = NA_character_,
+                            coresToUse = NA_integer_,
                             stringsAsFactors = FALSE
     )
     
@@ -33,17 +33,19 @@ whichComputer <- function() {
                                     Windows = { "C:/Users/" },
                                     Linux  = { "/home/" },
                                     MacOSX = { "/Users/" },
-                                    as.character( NA )
+                                    NA_character_
     )
     
     maybe.home.folder <- paste0( computer$home.folder, computer$user, "/" )
     if( file.exists( maybe.home.folder ) ) {
         computer$home.folder <- maybe.home.folder
-    } else {
+    } else if( file.exists( "~" ) ){
         goback <- getwd()
         setwd( "~" )
         computer$home.folder <- paste0( getwd(), "/" )
         setwd( goback )
+    } else {
+        computer$home.folder <- NA_character_
     }
     
     
@@ -66,23 +68,33 @@ whichComputer <- function() {
     }
     
     computer$name <- switch(
-        EXPR = computer$folderRMRW,
-        "/Users/ross/Google Drive/Ross - Monash Research work/" = "rossMBPr",
-        "/run/user/1000/gvfs/smb-share:server=pinpfp,share=rrdata/Research/APMS/" = "rossWorkUbuntu",
-        as.character( NA )
+        EXPR = computer$home.folder,
+        "/Users/ross/" = "rossMBPr",
+        "/home/pinp/" = "rossWorkUbuntu",
+        NA_character_
     )
     
-    logicalCores <- parallel::detectCores( logical = FALSE )
-    virtualCores <- parallel::detectCores( logical = TRUE )
-    if( anyNA( c( logicalCores, virtualCores ) ) ) {
-        computer$coresToUse <- 1L
-    } else if( virtualCores > logicalCores ) {
-        computer$coresToUse <- logicalCores
-    } else if( logicalCores > 2 ) {
-        computer$coresToUse <- logicalCores - 1L
-    } else {
-        computer$coresToUse <- 1L
+    computer$coresToUse <- switch(
+        EXPR = computer$name,
+        "rossMBPr" = 4L,
+        "rossWorkUbuntu" = 6L,
+        NA_integer_
+    )
+    
+    if( is.na( computer$coresToUse ) ) {
+        logicalCores <- parallel::detectCores( logical = FALSE )
+        virtualCores <- parallel::detectCores( logical = TRUE )
+        if( anyNA( c( logicalCores, virtualCores ) ) ) {
+            computer$coresToUse <- 1L
+        } else if( virtualCores > logicalCores ) {
+            computer$coresToUse <- logicalCores
+        } else if( logicalCores > 2 ) {
+            computer$coresToUse <- logicalCores - 1L
+        } else {
+            computer$coresToUse <- 1L
+        }
     }
+    
     
     # if( applyCores ) {
     #     doMC::registerDoMC( cores = computer$coresToUse )
