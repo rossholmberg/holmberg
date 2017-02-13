@@ -53,17 +53,51 @@ cropAndOutput <- function( input.image,
 #' @name segmentImage
 #' 
 #' @param input.image file name of input jpeg
-#' @param output.grid integer vector of format "c( x, y )"
+#' @param output.grid integer vector specifying how to divide the input image. format "c( x, y )"
+#' @param output.px integer vector specifying nominal dimensions of output images. format "c( x, y )"
+#' @param exact if TRUE, output.px will be followed exactly, even if the image is not divisible exactly.
+#' if FALSE, output.px will be automatically maintained as closely as possible while dividing the image exactly.
 #' @import magrittr
 #' @import data.table
 #' @export
     
 
-segmentImage <- function( input.image, output.grid = NULL ) {
+segmentImage <- function( input.image, output.grid = NULL, output.px = NULL, exact = TRUE ) {
     
+    # check that one of the appropriate input parameters were used
+    if( ( is.null( output.grid ) && is.null( output.px ) ) ||
+        ( !is.null( output.grid ) && !is.null( output.px ) ) ) {
+        stop( "You must specify either `output.grid` or `output.px`, but not both." )
+    }
+    
+    # note down which input parameter we'll be using here
+    if( !is.null( output.grid ) ) {
+        input.parameter.touse <- "grid"
+    } else if( !is.null( output.px ) ) {
+        input.parameter.touse <- "px"
+    }
+    
+    # check that whichever parameter was used is of length 2
+    if( input.parameter.touse == "grid" && length( output.grid ) != 2L ) {
+        stop( "The parameter `output.grid` must be a vector of length 2." )
+    }
+    if( input.parameter.touse == "px" && length( output.px ) != 2L ) {
+            stop( "The parameter `output.px` must be a vector of length 2." )
+    }
+    
+    # check that whichever parameter was used is numeric
+    if( !is.numeric( output.grid ) && !is.numeric( output.px ) ) {
+        stop( "The parameter `output.grid` or `output.px` must be an integer or numeric vector.")
+    }
+    
+    # check that the `exact` input parameter is either TRUE or FALSE
+    if( is.na( exact ) ||is.null( exact ) || ( !isTRUE( exact ) && exact != FALSE ) ) {
+        stop( "The parameter `exact` must be either TRUE or FALSE." )
+    }
+    
+    # find the format of the input file (to make sure it's a jpeg image)
     input.format <- strsplit( input.image, split = "\\." ) %>%
                             sapply( tail, n = 1L )
-    
     if( !input.format %in% c( "jpg", "jpeg", "JPG", "JPEG" ) ) {
         stop( "`input.image` must be jpg format" )
     }
@@ -73,15 +107,17 @@ segmentImage <- function( input.image, output.grid = NULL ) {
     grid.coord.upperleft.x <- grid.coord.upperleft.y <- NULL
     image.width <- image.height <- output.filename <- NULL
     
+    # find the dimensions of the input file
     input.dim <- holmberg::exifRead( input.image, coresToUse = 1 ) %>%
         setDT() %>%
         .[ , .( ImageWidth, ImageHeight ) ]
     
-    if( !is.null( output.grid ) ) {
+    if( input.parameter.touse == "px" ) {
+        outputGrid.x <- ceiling( input.dim$ImageWidth )
+        outputGrid.y <- ceiling( input.dim$ImageHeight )
+    } else {
         outputGrid.x <- output.grid[1]
         outputGrid.y <- output.grid[2]
-    } else {
-        stop( "Missing parameter `output.grid`." )
     }
     
     outputDim.x <- round( input.dim$ImageWidth / outputGrid.x )
