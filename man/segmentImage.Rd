@@ -4,12 +4,14 @@
 \alias{segmentImage}
 \title{segmentImage}
 \usage{
-segmentImage(input.image, output.grid = NULL)
+segmentImage(input.image, output.grid = NULL, output.px = NULL)
 }
 \arguments{
 \item{input.image}{file name of input jpeg}
 
-\item{output.grid}{integer vector of format "c( x, y )"}
+\item{output.grid}{integer vector specifying how to divide the input image. format "c( x, y )"}
+
+\item{output.px}{integer vector specifying nominal dimensions of output images. format "c( x, y )"}
 }
 \description{
 Break up a .jpg image into segments, before outputting to individual files

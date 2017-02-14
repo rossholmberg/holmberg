@@ -55,14 +55,12 @@ cropAndOutput <- function( input.image,
 #' @param input.image file name of input jpeg
 #' @param output.grid integer vector specifying how to divide the input image. format "c( x, y )"
 #' @param output.px integer vector specifying nominal dimensions of output images. format "c( x, y )"
-#' @param exact if TRUE, output.px will be followed exactly, even if the image is not divisible exactly.
-#' if FALSE, output.px will be automatically maintained as closely as possible while dividing the image exactly.
 #' @import magrittr
 #' @import data.table
 #' @export
     
 
-segmentImage <- function( input.image, output.grid = NULL, output.px = NULL, exact = TRUE ) {
+segmentImage <- function( input.image, output.grid = NULL, output.px = NULL ) {
     
     # check that one of the appropriate input parameters were used
     if( ( is.null( output.grid ) && is.null( output.px ) ) ||
@@ -91,9 +89,10 @@ segmentImage <- function( input.image, output.grid = NULL, output.px = NULL, exa
     }
     
     # check that the `exact` input parameter is either TRUE or FALSE
-    if( is.na( exact ) ||is.null( exact ) || ( !isTRUE( exact ) && exact != FALSE ) ) {
-        stop( "The parameter `exact` must be either TRUE or FALSE." )
-    }
+    # if( is.na( exact ) ||is.null( exact ) || ( !isTRUE( exact ) && exact != FALSE ) ) {
+    #     stop( "The parameter `exact` must be either TRUE or FALSE." )
+    # }
+    exact <- FALSE
     
     # find the format of the input file (to make sure it's a jpeg image)
     input.format <- strsplit( input.image, split = "\\." ) %>%
@@ -113,8 +112,8 @@ segmentImage <- function( input.image, output.grid = NULL, output.px = NULL, exa
         .[ , .( ImageWidth, ImageHeight ) ]
     
     if( input.parameter.touse == "px" ) {
-        outputGrid.x <- ceiling( input.dim$ImageWidth )
-        outputGrid.y <- ceiling( input.dim$ImageHeight )
+        outputGrid.x <- round( input.dim$ImageWidth / output.px[1] )
+        outputGrid.y <- ceiling( input.dim$ImageHeight / output.px[2] )
     } else {
         outputGrid.x <- output.grid[1]
         outputGrid.y <- output.grid[2]
