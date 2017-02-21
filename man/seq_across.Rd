@@ -18,4 +18,3 @@ Return a sequential vector along x column-wise.
 \keyword{data.frame}
 \keyword{data.table}
 \keyword{matrix}
-

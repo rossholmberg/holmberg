@@ -33,4 +33,3 @@ character strings, where inputs vary in length.
 \keyword{character}
 \keyword{length}
 \keyword{string}
-

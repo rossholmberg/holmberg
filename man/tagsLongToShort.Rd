@@ -25,4 +25,3 @@ base 10 integer, as used by the older "Automated Penguin Monitoring System".
 \keyword{integer}
 \keyword{length}
 \keyword{string}
-

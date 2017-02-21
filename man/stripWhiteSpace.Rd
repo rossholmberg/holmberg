@@ -20,4 +20,3 @@ Strip the white space from around a character string
 \keyword{string}
 \keyword{trailing}
 \keyword{whitespace}
-

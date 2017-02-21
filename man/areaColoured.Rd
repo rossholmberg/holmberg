@@ -20,4 +20,3 @@ Calculate the area of an image matching a specific colour
 \keyword{analysis}
 \keyword{image}
 \keyword{jpeg}
-

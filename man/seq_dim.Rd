@@ -21,4 +21,3 @@ Return a sequential vector along x in the dimension specified.
 \keyword{data.frame}
 \keyword{data.table}
 \keyword{matrix}
-

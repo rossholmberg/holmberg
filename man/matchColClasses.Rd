@@ -23,4 +23,3 @@ Note: this is just an easy way to use `getColClasses` and `applyColClasses` in a
 \keyword{columns,}
 \keyword{dataframe,}
 \keyword{datatable,}
-

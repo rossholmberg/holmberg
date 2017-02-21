@@ -16,4 +16,3 @@ segmentImage(input.image, output.grid = NULL, output.px = NULL)
 \description{
 Break up a .jpg image into segments, before outputting to individual files
 }
-

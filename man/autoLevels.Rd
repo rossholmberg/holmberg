@@ -19,4 +19,3 @@ calculate and apply a linear levels function to an image
 \keyword{image}
 \keyword{levels}
 \keyword{modify}
-

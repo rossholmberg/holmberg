@@ -23,4 +23,3 @@ Match the column names between 2 data frames. Useful to use before doing calling
 \keyword{dataframe,}
 \keyword{datatable,}
 \keyword{matching}
-

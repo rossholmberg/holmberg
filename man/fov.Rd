@@ -16,4 +16,3 @@ fov(focal.length, distance.to.subject.m = 40, focal.mult = 1)
 \description{
 calculate the field of view for a given camera setup
 }
-

@@ -18,4 +18,3 @@ calculate and apply an S curve to modify the contrast of an image
 \keyword{curve}
 \keyword{image}
 \keyword{modify}
-

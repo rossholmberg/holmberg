@@ -28,4 +28,3 @@ Smooth a numeric vector using moving window averaging.
 \keyword{rolling}
 \keyword{smooth}
 \keyword{window}
-

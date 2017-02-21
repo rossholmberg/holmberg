@@ -23,4 +23,3 @@ Shift values of a vector by a given amount.
 \keyword{lead}
 \keyword{shift,}
 \keyword{vector,}
-

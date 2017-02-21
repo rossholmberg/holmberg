@@ -20,4 +20,3 @@ Extract filename, directory, date, and time from image EXIF data.
 \keyword{image}
 \keyword{name}
 \keyword{time}
-

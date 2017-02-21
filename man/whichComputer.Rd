@@ -15,4 +15,3 @@ A function to find the computer currently in use
 \keyword{OperatingSystem}
 \keyword{UserName}
 \keyword{computer}
-

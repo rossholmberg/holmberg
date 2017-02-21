@@ -19,4 +19,3 @@ Retrieve the column classes from a data frame.
 \keyword{columns,}
 \keyword{dataframe,}
 \keyword{datatable,}
-

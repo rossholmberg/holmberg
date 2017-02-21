@@ -18,4 +18,3 @@ Converting easting and northing values to GPS coordinates
 }
 \keyword{gps}
 \keyword{spatial}
-

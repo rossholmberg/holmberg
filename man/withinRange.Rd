@@ -23,4 +23,3 @@ Test whether one or more values fall within a specified range.
 \keyword{numeric}
 \keyword{range}
 \keyword{within}
-

@@ -25,4 +25,3 @@ Source all files in a particular folder.
 \keyword{load,}
 \keyword{script}
 \keyword{source,}
-

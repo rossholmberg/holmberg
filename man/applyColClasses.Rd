@@ -21,4 +21,3 @@ Apply column classes to a data frame. Useful before calling `rbind`.
 \keyword{columns,}
 \keyword{dataframe,}
 \keyword{datatable,}
-

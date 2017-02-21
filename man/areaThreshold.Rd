@@ -22,4 +22,3 @@ Calculate the area of an image with colour EXCEEDING threshold grey value
 \keyword{analysis}
 \keyword{image}
 \keyword{jpeg}
-

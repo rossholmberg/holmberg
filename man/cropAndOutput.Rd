@@ -23,4 +23,3 @@ cropAndOutput(input.image, grid.coord.upperleft.x, grid.coord.upperleft.y,
 \description{
 Functions for segmenting an image into a grid of smaller images
 }
-
