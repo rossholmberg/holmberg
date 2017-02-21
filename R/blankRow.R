@@ -1,6 +1,7 @@
 #' A function for use when adding a data row to a given data frame
 #' 
 #' @param x a data.frame or data.table to have a row added
+#' @param n how many rows to return
 #'
 #' @importFrom data.table setDT
 #' @importFrom data.table is.data.table

@@ -8,6 +8,8 @@ blankRow(x, n = 1L)
 }
 \arguments{
 \item{x}{a data.frame or data.table to have a row added}
+
+\item{n}{how many rows to return}
 }
 \description{
 A function for use when adding a data row to a given data frame
