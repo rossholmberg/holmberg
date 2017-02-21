@@ -4,6 +4,8 @@
 #' @param DT should the output be a data.table? (data.frame is output if FALSE)
 #' @importFrom data.table setDT
 #' @importFrom stats rnorm
+#' @export
+#' 
 
 testDF <- function( rows, DT = FALSE ) {
     

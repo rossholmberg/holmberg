@@ -14,4 +14,3 @@ testDF(rows, DT = FALSE)
 \description{
 testDF, a function for creating a data frame for mucking around with.
 }
-
