@@ -14,7 +14,9 @@ testDF <- function( rows, DT = FALSE ) {
                           function(x) {
                               paste( sample( letters, 4, replace = TRUE ), collapse = "" )
                           } ),
-        ints = sample( seq.int( from = 1000L, to = 9999L, by = 1L ), rows ),
+        ints = sample( x = seq.int( from = 1000L, to = 9999L, by = 1L ),
+                       size = rows,
+                       replace = TRUE ),
         rands = rnorm( rows ),
         stringsAsFactors = FALSE
     )
