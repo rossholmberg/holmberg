@@ -36,6 +36,10 @@ idDub <- function(i, inputlat, inputlon, inputdata, outputlat, outputlon, landma
     .Call('holmberg_idDub', PACKAGE = 'holmberg', i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
 }
 
+interpolate <- function(x_in, y_in, x_out) {
+    .Call('holmberg_interpolate', PACKAGE = 'holmberg', x_in, y_in, x_out)
+}
+
 invDistWInt <- function(inputlat, inputlon, inputdata, outputlat, outputlon) {
     .Call('holmberg_invDistWInt', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon)
 }

@@ -38,6 +38,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// interpolate
+NumericVector interpolate(NumericVector x_in, NumericVector y_in, NumericVector x_out);
+RcppExport SEXP holmberg_interpolate(SEXP x_inSEXP, SEXP y_inSEXP, SEXP x_outSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x_in(x_inSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y_in(y_inSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x_out(x_outSEXP);
+    rcpp_result_gen = Rcpp::wrap(interpolate(x_in, y_in, x_out));
+    return rcpp_result_gen;
+END_RCPP
+}
 // invDistWInt
 NumericVector invDistWInt(NumericVector inputlat, NumericVector inputlon, NumericVector inputdata, NumericVector outputlat, NumericVector outputlon);
 RcppExport SEXP holmberg_invDistWInt(SEXP inputlatSEXP, SEXP inputlonSEXP, SEXP inputdataSEXP, SEXP outputlatSEXP, SEXP outputlonSEXP) {
