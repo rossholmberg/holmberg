@@ -1,6 +1,15 @@
 #include <Rcpp.h>
 using namespace Rcpp;
-
+//' interpolate missing y values to fill a given x series
+//'
+//'
+//' @param x_in input x series
+//' @param y_in input variable series
+//' @param x_out output x series
+//' 
+//' @keywords interpolate
+//' @export
+//'
 // [[Rcpp::export]]
 NumericVector interpolate(NumericVector x_in,
                           NumericVector y_in,

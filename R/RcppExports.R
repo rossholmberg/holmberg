@@ -36,6 +36,16 @@ idDub <- function(i, inputlat, inputlon, inputdata, outputlat, outputlon, landma
     .Call('holmberg_idDub', PACKAGE = 'holmberg', i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
 }
 
+#' interpolate missing y values to fill a given x series
+#'
+#'
+#' @param x_in input x series
+#' @param y_in input variable series
+#' @param x_out output x series
+#' 
+#' @keywords interpolate
+#' @export
+#'
 interpolate <- function(x_in, y_in, x_out) {
     .Call('holmberg_interpolate', PACKAGE = 'holmberg', x_in, y_in, x_out)
 }
