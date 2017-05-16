@@ -7,6 +7,8 @@ using namespace Rcpp;
 //' @param y_in input variable series
 //' @param x_out output x series
 //' 
+//' @useDynLib holmberg
+//' 
 //' @keywords interpolate
 //' @export
 //'

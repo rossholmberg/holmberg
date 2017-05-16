@@ -3,14 +3,15 @@
 using namespace Rcpp;
 
 
-// A c++ implementation of inverse distance weighted interpolation
-
-// @param inputlat
-// @param inputlon
-// @param inputdata
-// @param outputlat
-// @param outputlon
-
+//' A c++ implementation of inverse distance weighted interpolation
+//' @param inputlat vector of input latitudes
+//' @param inputlon vector of input longitudes
+//' @param inputdata vector of input data
+//' @param outputlat vector of output latitudes
+//' @param outputlon vector of output longitudes
+//' 
+//' @useDynLib holmberg
+//' @export
 // [[Rcpp::export]]
 NumericVector invDistWInt(NumericVector inputlat,
                           NumericVector inputlon,

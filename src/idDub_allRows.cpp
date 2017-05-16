@@ -10,6 +10,8 @@ using namespace Rcpp;
 //' @param outputlon longitudes of output data
 //' @param landmask aligned data for masking
 //' 
+//' @useDynLib holmberg
+//' 
 //' @keywords inverse distance weighted average
 //' @export
 //'

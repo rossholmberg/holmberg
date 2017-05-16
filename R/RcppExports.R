@@ -11,6 +11,8 @@
 #' @param outputlon longitudes of output data
 #' @param landmask aligned data for masking
 #' 
+#' @useDynLib holmberg
+#' 
 #' @keywords inverse distance weighted average
 #' @export
 #'
@@ -29,6 +31,8 @@ idDub_allRows <- function(inputlat, inputlon, inputdata, outputlat, outputlon, l
 #' @param outputlon longitudes of output data
 #' @param landmask aligned data for masking
 #' 
+#' @useDynLib holmberg
+#' 
 #' @keywords inverse distance weighted average
 #' @export
 #'
@@ -43,6 +47,8 @@ idDub <- function(i, inputlat, inputlon, inputdata, outputlat, outputlon, landma
 #' @param y_in input variable series
 #' @param x_out output x series
 #' 
+#' @useDynLib holmberg
+#' 
 #' @keywords interpolate
 #' @export
 #'
@@ -50,6 +56,15 @@ interpolate <- function(x_in, y_in, x_out) {
     .Call('holmberg_interpolate', PACKAGE = 'holmberg', x_in, y_in, x_out)
 }
 
+#' A c++ implementation of inverse distance weighted interpolation
+#' @param inputlat vector of input latitudes
+#' @param inputlon vector of input longitudes
+#' @param inputdata vector of input data
+#' @param outputlat vector of output latitudes
+#' @param outputlon vector of output longitudes
+#' 
+#' @useDynLib holmberg
+#' @export
 invDistWInt <- function(inputlat, inputlon, inputdata, outputlat, outputlon) {
     .Call('holmberg_invDistWInt', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon)
 }
