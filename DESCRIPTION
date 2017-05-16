@@ -1,6 +1,6 @@
 Package: holmberg
 Title: A personal package by Ross Holmberg
-Version: 0.2.0.0
+Version: 0.2.0.1
 Authors@R: person( "Ross", "Holmberg", email = "ross@holmberg.com.au", role = c( "aut", "cre" ) )
 Description: An assortment of functions to help you get on with your day.
 Depends: R (>= 3.3.0)
@@ -18,7 +18,8 @@ Imports: data.table,
          plyr,
          sp,
          magrittr,
-         methods
+         methods,
+         reticulate
 Suggests: dplyr,
           ggplot2,
           stats,
@@ -27,5 +28,6 @@ Suggests: dplyr,
           readxl,
           utils,
           DT
-SystemRequirements: "exiftool" for exifRead (http://www.sno.phy.queensu.ca/~phil/exiftool/)
+SystemRequirements: "exiftool" for exifRead (http://www.sno.phy.queensu.ca/~phil/exiftool/),
+            "numpy" in python for imageSlice
 LinkingTo: Rcpp
