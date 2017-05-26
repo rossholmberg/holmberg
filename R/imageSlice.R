@@ -72,6 +72,7 @@ imageSlice <- function( image,
         }
         output.folder <- output.folder.try
         cat( "Using output folder", output.folder, "\n" )
+        dir.create( output.folder )
     }
 
 
@@ -111,7 +112,7 @@ imageSlice <- function( image,
     lapply( X = seq_len( nrow( outputs ) ),
             FUN = function(x) {
 
-                output.filename <- normalizePath( outputs$filename[x] )
+                output.filename <- outputs$filename[x]
 
                 crop.grid <- c( outputs$x.start[x],
                                 outputs$y.start[x],
