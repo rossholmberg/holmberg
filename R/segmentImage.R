@@ -62,6 +62,8 @@ cropAndOutput <- function( input.image,
 
 segmentImage <- function( input.image, output.grid = NULL, output.px = NULL ) {
     
+    . <- NULL
+    
     # check that one of the appropriate input parameters were used
     if( ( is.null( output.grid ) && is.null( output.px ) ) ||
         ( !is.null( output.grid ) && !is.null( output.px ) ) ) {

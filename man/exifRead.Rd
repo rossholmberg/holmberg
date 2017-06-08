@@ -4,13 +4,10 @@
 \alias{exifRead}
 \title{Extract filename, directory, date, and time from image EXIF data.}
 \usage{
-exifRead(files, coresToUse = TRUE)
+exifRead(paths)
 }
 \arguments{
-\item{files}{A vector of files to be analysed.}
-
-\item{coresToUse}{Either "TRUE" (will use some logic to determine the number of cores to utilise),
-or an integer value specifying the number of cores to multi-thread tasks to.}
+\item{paths}{A vector of file or folder paths to be analysed.}
 }
 \description{
 Extract filename, directory, date, and time from image EXIF data.

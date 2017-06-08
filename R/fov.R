@@ -15,6 +15,8 @@ fov <- function( focal.length,
                  distance.to.subject.m = 40,
                  focal.mult = 1 ) {
     
+    . <- NULL
+    
     # figure out how many rows we'll need
     rows <- length( focal.length ) * length( distance.to.subject.m ) * length( focal.mult )
     
