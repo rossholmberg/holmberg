@@ -66,3 +66,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"holmberg_idDub_allRows", (DL_FUNC) &holmberg_idDub_allRows, 6},
+    {"holmberg_idDub", (DL_FUNC) &holmberg_idDub, 7},
+    {"holmberg_interpolate", (DL_FUNC) &holmberg_interpolate, 3},
+    {"holmberg_invDistWInt", (DL_FUNC) &holmberg_invDistWInt, 5},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_holmberg(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
