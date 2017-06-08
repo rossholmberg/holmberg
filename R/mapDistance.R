@@ -92,10 +92,6 @@ mapDistance <- function( lat.1, lon.1, lat.2, lon.2, unit = "km" ) {
     # get a latitude to use as a reference point
     if( length( lat.1 ) == 1L && length( lat.2 ) == 1L ) {
         lat.ref <- mean( lat.1, lat.2 )
-    } else if( length( lat.1 ) == 1L ) {
-        lat.ref <- lat.1
-    } else if( length( lat.2 ) == 1L ) {
-        lat.ref <- lat.2
     } else {
         lat.ref <- ( lat.1 + lat.2 ) / 2
     }

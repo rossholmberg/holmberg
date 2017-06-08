@@ -19,7 +19,7 @@ sourceFolder <- function( folder, except = NULL, use.regex = FALSE, quietly = FA
             except <- paste0( except, collapse = "|" )
             files <- files[ !grepl( except, files ) ]
         } else {
-            filenames <- sapply( strsplit( files, split = "/" ), tail, n = 1L )
+            filenames <- gsub( ".*/", "", files )
             files <- files[ !( filenames %in% except ) ]
         }
         
@@ -31,7 +31,7 @@ sourceFolder <- function( folder, except = NULL, use.regex = FALSE, quietly = FA
         
         if( !quietly ) {
             print( paste( "Sourced",
-                          tail( strsplit( file, split = "/" )[[1]], n = 1L ) )
+                          gsub( ".*/", "", file ) )
             )
         }
         
