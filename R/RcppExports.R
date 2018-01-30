@@ -17,7 +17,7 @@
 #' @export
 #'
 idDub_allRows <- function(inputlat, inputlon, inputdata, outputlat, outputlon, landmask) {
-    .Call('holmberg_idDub_allRows', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
+    .Call('_holmberg_idDub_allRows', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
 }
 
 #' calculate data based on inverse distance weighted interpolation
@@ -37,7 +37,7 @@ idDub_allRows <- function(inputlat, inputlon, inputdata, outputlat, outputlon, l
 #' @export
 #'
 idDub <- function(i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask) {
-    .Call('holmberg_idDub', PACKAGE = 'holmberg', i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
+    .Call('_holmberg_idDub', PACKAGE = 'holmberg', i, inputlat, inputlon, inputdata, outputlat, outputlon, landmask)
 }
 
 #' interpolate missing y values to fill a given x series
@@ -53,7 +53,7 @@ idDub <- function(i, inputlat, inputlon, inputdata, outputlat, outputlon, landma
 #' @export
 #'
 interpolate <- function(x_in, y_in, x_out) {
-    .Call('holmberg_interpolate', PACKAGE = 'holmberg', x_in, y_in, x_out)
+    .Call('_holmberg_interpolate', PACKAGE = 'holmberg', x_in, y_in, x_out)
 }
 
 #' A c++ implementation of inverse distance weighted interpolation
@@ -66,6 +66,6 @@ interpolate <- function(x_in, y_in, x_out) {
 #' @useDynLib holmberg
 #' @export
 invDistWInt <- function(inputlat, inputlon, inputdata, outputlat, outputlon) {
-    .Call('holmberg_invDistWInt', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon)
+    .Call('_holmberg_invDistWInt', PACKAGE = 'holmberg', inputlat, inputlon, inputdata, outputlat, outputlon)
 }
 

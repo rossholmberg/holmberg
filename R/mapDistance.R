@@ -96,6 +96,32 @@ mapDistance <- function( lat.1, lon.1, lat.2, lon.2, unit = "km" ) {
         lat.ref <- ( lat.1 + lat.2 ) / 2
     }
     
+    # check to see if the values cross between that 180 to -180 transition
+    lon.1.neg <- lon.1 < 0
+    lon.2.neg <- lon.2 < 0
+    deg.diff <- abs( lon.1 - lon.2 )
+    
+    # mark which ones we need to correct
+    to.correct <- { { lon.1.neg & !lon.2.neg } | { !lon.1.neg & lon.2.neg } } & deg.diff > 180
+    
+    # those needing correction, adjust the negative value by adding 360
+    lon.1[ to.correct & lon.1.neg ] <- lon.1[ to.correct & lon.1.neg ] + 360
+    lon.2[ to.correct & lon.2.neg ] <- lon.2[ to.correct & lon.2.neg ] + 360
+    
+    # clean up
+    rm( lon.1.neg, lon.2.neg, deg.diff, to.correct )
+    
+    # also check for crossing the 0 to 360 transition
+    lon.1.gt180 <- lon.1 > 180
+    lon.2.gt180 <- lon.2 > 180
+    deg.diff <- abs( lon.1 - lon.2 )
+    
+    to.correct <- { { lon.1.gt180 & !lon.2.gt180 } | { !lon.1.gt180 & lon.2.gt180 } } & deg.diff > 180
+    
+    # those needing correction, add 360 to the smaller value
+    lon.1[ to.correct & !lon.1.gt180 ] <- lon.1[ to.correct & !lon.1.gt180 ] + 360
+    lon.2[ to.correct & !lon.2.gt180 ] <- lon.2[ to.correct & !lon.2.gt180 ] + 360
+    
     # and the longitudinal distance
     lon.dist <- lonDegToKm( abs( lon.1 - lon.2 ), lat = lat.ref )
     

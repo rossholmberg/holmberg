@@ -4,10 +4,12 @@
 \alias{exifRead}
 \title{Extract filename, directory, date, and time from image EXIF data.}
 \usage{
-exifRead(paths)
+exifRead(paths, chunk.size = 500)
 }
 \arguments{
-\item{paths}{A vector of file or folder paths to be analysed.}
+\item{paths}{A vector of file or folder paths to be analysed}
+
+\item{chunk.size}{How many files to process at a time}
 }
 \description{
 Extract filename, directory, date, and time from image EXIF data.

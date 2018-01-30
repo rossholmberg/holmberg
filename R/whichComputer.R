@@ -15,6 +15,7 @@ whichComputer <- function() {
                             home.folder = NA_character_,
                             drive.folder = NA_character_,
                             folderRMRW = NA_character_,
+                            pinp.data = NA_character_,
                             coresToUse = NA_integer_,
                             stringsAsFactors = FALSE
     )
@@ -71,6 +72,12 @@ whichComputer <- function() {
         EXPR = computer$home.folder,
         "/Users/ross/" = "rossMBPr",
         "/home/pinp/" = "rossWorkUbuntu",
+        NA_character_
+    )
+    
+    computer$pinp.data <- switch(
+        EXPR = computer$name,
+        "rossWorkUbuntu" = "/run/user/1000/gvfs/smb-share:server=pinpfile,share=data/",
         NA_character_
     )
     

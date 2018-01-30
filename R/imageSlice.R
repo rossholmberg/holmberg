@@ -25,14 +25,18 @@ imageSlice <- function( image,
     image.name <- gsub( ".*/", "", image )
 
     # import the image using python
+    reticulate::py_run_string( "from PIL import Image", convert = FALSE )
+    reticulate::py_run_string( paste0( "img = Image.open( '", image, "' )" ), convert = FALSE )
+    
     pil.image <- reticulate::import( "PIL.Image", convert = FALSE )
-    img <- pil.image$open( image )
-    im.dim <- reticulate::py_get_attr( img, "size" )
-
+    pyimage <- pil.image$open( image )
+    im.dim <- reticulate::py_get_attr( pyimage, "size" )
+    pyimage$close()
+    
     im.dim <- reticulate::py_to_r( im.dim )
     im.height <- unlist( im.dim[2] )
     im.width <- unlist( im.dim[1] )
-
+    rm( im.dim )
 
     # find the dimensions to use for output images
     if( im.width %% x.px.out > x.px.out / 2 ) {
@@ -118,14 +122,24 @@ imageSlice <- function( image,
                                 outputs$y.start[x],
                                 outputs$x.stop[x],
                                 outputs$y.stop[x] )
-                crop.grid <- as.integer( crop.grid )
-                crop.grid <- reticulate::r_to_py( crop.grid )
-
-                output.array <- img$crop( box = crop.grid )
-                output.array$save( output.filename )
+                crop.grid <- as.integer( crop.grid ) - 1L
+                reticulate::py_run_string(
+                    paste0( "output = img.crop( [",
+                            paste( crop.grid, collapse = "," ),
+                            "] )" ) )
+                
+                reticulate::py_run_string(
+                    paste0( "output.save( '",
+                            output.filename,
+                            "' )"
+                    )
+                )
 
             } )
-
+    
+    # clear the python objects from memory
+    reticulate::py_run_string( "output.close()" )
+    reticulate::py_run_string( "img.close()" )
 
     return( invisible( TRUE ) )
 
