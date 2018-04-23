@@ -25,4 +25,3 @@ ENtoGPS <- function( eastings, northings, input.projection = "+init=epsg:28355" 
     
 }
 
-## GPStoEN
